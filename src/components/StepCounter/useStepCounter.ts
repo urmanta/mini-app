@@ -32,9 +32,11 @@ const useStepCounter = () => {
 
     // Обновление скорости из LocationManager
     const updateSpeedFromLocation = () => {
-        if (locationPermission) return;
+        console.log('locationPermission', locationPermission);
+        // if (locationPermission) return;
 
         webapp.LocationManager.getLocation((data) => {
+            console.log('data >>>>> ', data);
             const { speed } = data; // Скорость в метрах/секунду
             setCurrentSpeed(speed);
         });
