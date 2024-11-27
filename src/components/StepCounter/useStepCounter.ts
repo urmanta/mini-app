@@ -64,15 +64,15 @@ const useStepCounter = () => {
         console.log('filteredAccel >>>> ', filteredAccel);
         console.log('rotation >>>> ', rotation);
         console.log('currentSpeed >>>> ', currentSpeed);
+        console.log('stepCount >>>>>> ', stepCount);
 
         // Условие для подсчёта шага
         if (
             Math.abs(filteredAccel - 9.8) > ACCEL_THRESHOLD && // Ускорение превышает порог
-            rotation > GYRO_THRESHOLD && // Вращение превышает порог
-            currentSpeed !== null // Скорость больше порога
+            rotation > GYRO_THRESHOLD // Вращение превышает порог
+            // currentSpeed !== null // Скорость больше порога
         ) {
-            console.log('stepCount >>>>>> ', stepCount);
-            setStepCount(stepCount + 1);
+            setStepCount((prev) => prev + 1);
         }
     };
 
@@ -107,10 +107,6 @@ const useStepCounter = () => {
             // Инициализация геолокации
             webapp.LocationManager.init(() => {
                 const { isInited, isLocationAvailable, isAccessGranted } = webapp.LocationManager;
-
-                console.log('webapp.LocationManager >>>>> ', webapp.LocationManager);
-
-                webapp.LocationManager.openSettings();
 
                 const permission = isInited && isLocationAvailable && isAccessGranted;
 
