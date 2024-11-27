@@ -162,7 +162,7 @@ const useStepCounter = () => {
             webapp.onEvent('accelerometerChanged', handleAccelerometer);
             webapp.onEvent('gyroscopeChanged', handleGyroscope);
 
-            webapp.LocationManager.init();
+            webapp.LocationManager.init(() => {console.log('LocationManager inited')});
             webapp.onEvent('locationRequested', handleLocation);
         };
 
