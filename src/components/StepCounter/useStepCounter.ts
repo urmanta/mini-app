@@ -103,16 +103,19 @@ const useStepCounter = () => {
             webapp.Accelerometer.start();
             webapp.Gyroscope.start();
 
-            // Слушатели событий
-            webapp.onEvent('accelerometerChanged', detectStep);
-
             // Инициализация геолокации
             webapp.LocationManager.init(() => {
                 const { isInited, isLocationAvailable, isAccessGranted } = webapp.LocationManager;
 
                 console.log('webapp.LocationManager >>>>> ', webapp.LocationManager);
 
-                setLocationPermission(isInited && isLocationAvailable && isAccessGranted);
+                webapp.LocationManager.openSettings();
+
+                const permission = isInited && isLocationAvailable && isAccessGranted;
+
+                if (!permission) webapp.LocationManager.openSettings();
+
+                setLocationPermission(permission);
 
                 // Получение начальной скорости
                 updateSpeedFromLocation();
@@ -122,6 +125,12 @@ const useStepCounter = () => {
 
                 // Очистка интервала при размонтировании
                 return () => clearInterval(locationInterval);
+            });
+
+            // Слушатели событий
+            webapp.onEvent('accelerometerChanged', detectStep);
+            webapp.onEvent('locationManagerUpdated', () => {
+                console.log('New LocationManager >>>>> ', webapp.LocationManager)
             });
         };
 
