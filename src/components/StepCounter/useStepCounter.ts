@@ -84,9 +84,9 @@ const useStepCounter = () => {
         const magnitude = Math.sqrt(x * x + y * y + z * z);
         const filteredMagnitude = lowPassFilter(magnitude, prevAccelMagnitude.current);
 
-        console.log('this >>>> ', this);
-        console.log('magnitude >>>> ', magnitude);
-        console.log('filteredMagnitude >>>> ', filteredMagnitude);
+        // console.log('this >>>> ', this);
+        // console.log('magnitude >>>> ', magnitude);
+        // console.log('filteredMagnitude >>>> ', filteredMagnitude);
 
         const now = Date.now();
         const timeDiff = now - lastStepTime.current;
@@ -113,12 +113,12 @@ const useStepCounter = () => {
         // Detect rotation based on beta (forward/backward tilt) and gamma (left/right tilt)
         const rotationMagnitude = Math.sqrt(x * x + y * y + z * z);
 
-        console.log('rotationMagnitude >>>> ', rotationMagnitude);
+        // console.log('rotationMagnitude >>>> ', rotationMagnitude);
         isRotating.current = rotationMagnitude > GYRO_THRESHOLD;
     };
 
     const handleLocation = function(this: LocationData) {
-        console.log('this.speed >>>> ', this.speed);
+        // console.log('this.speed >>>> ', this.speed);
         if (this.speed !== null) {
             currentSpeed.current = this.speed;
             setIsMoving(this.speed > SPEED_THRESHOLD);
@@ -162,7 +162,12 @@ const useStepCounter = () => {
             webapp.onEvent('accelerometerChanged', handleAccelerometer);
             webapp.onEvent('gyroscopeChanged', handleGyroscope);
 
-            webapp.LocationManager.init(() => {console.log('LocationManager inited')});
+            webapp.LocationManager.init(() => {
+                console.log('LocationManager inited');
+                webapp.LocationManager.getLocation((data) => {
+                    console.log('data >>>> ', data)
+                })
+            });
             webapp.onEvent('locationRequested', handleLocation);
         };
 
