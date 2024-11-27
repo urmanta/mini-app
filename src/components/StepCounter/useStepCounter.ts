@@ -69,7 +69,7 @@ const useStepCounter = () => {
         if (
             Math.abs(filteredAccel - 9.8) > ACCEL_THRESHOLD && // Ускорение превышает порог
             rotation > GYRO_THRESHOLD && // Вращение превышает порог
-            currentSpeed !== null && currentSpeed > SPEED_THRESHOLD // Скорость больше порога
+            currentSpeed !== null // Скорость больше порога
         ) {
             setStepCount((prev) => prev + 1);
         }
@@ -129,9 +129,6 @@ const useStepCounter = () => {
 
             // Слушатели событий
             webapp.onEvent('accelerometerChanged', detectStep);
-            webapp.onEvent('locationManagerUpdated', () => {
-                console.log('New LocationManager >>>>> ', webapp.LocationManager)
-            });
         };
 
         // Ожидаем готовности WebApp и инициализируем сенсоры
