@@ -18,126 +18,64 @@ interface GyroscopeData {
     z: number;
 }
 
-interface LocationData {
-    isInited: boolean;
-    isLocationAvailable: boolean;
-    isAccessRequested: boolean;
-    isAccessGranted: boolean;
-    latitude: number;
-    longitude: number;
-    speed: number | null;
-    direction: number | null;
-}
-
-declare global {
-    interface Window {
-        Telegram: {
-            WebApp: {
-                Accelerometer: {
-                    start: (params: unknown, callback: () => void) => void;
-                    stop: () => void;
-                    x: number;
-                    y: number;
-                    z: number;
-                };
-                Gyroscope: {
-                    start: () => void;
-                    stop: () => void;
-                    x: number;
-                    y: number;
-                    z: number;
-                };
-                LocationManager: {
-                    init: (callback: () => void) => void;
-                };
-                onEvent: (eventType: string, callback: () => void) => void;
-                offEvent: (eventType: string, callback: () => void) => void;
-                ready: () => void;
-                platform: string;
-            };
-        };
-    }
-}
-
 const useStepCounter = () => {
-    const [stepCount, setStepCount] = useState(0);
-    const [isMoving, setIsMoving] = useState(false);
-    const [sensorsAvailable, setSensorsAvailable] = useState(false);
-    const [locationPermission, setLocationPermission] = useState<boolean | null>(null);
-
-    const lastStepTime = useRef(Date.now());
-    const prevAccelMagnitude = useRef(0);
-    const isRotating = useRef(false);
-    const currentSpeed = useRef(0);
+    const [stepCount, setStepCount] = useState(0); // Количество шагов
+    const [sensorsAvailable, setSensorsAvailable] = useState(false); // Доступность сенсоров
+    const [locationPermission, setLocationPermission] = useState<boolean | null>(null); // Права на геолокацию
+    const [currentSpeed, setCurrentSpeed] = useState<number | null>(null); // Текущая скорость
 
     const webapp = window.Telegram.WebApp;
 
-    // Low-pass filter to reduce noise
-    const lowPassFilter = (value: number, prevValue: number, alpha: number = LOW_PASS_ALPHA) => {
-        return alpha * prevValue + (1 - alpha) * value;
+    // Предыдущее значение ускорения для фильтрации
+    const lastAcceleration = useRef<AccelerometerEvent>({ x: 0, y: 0, z: 0 });
+    const lastRotation = useRef<number>(0); // Предыдущее значение вращения
+
+    // Обновление скорости из LocationManager
+    const updateSpeedFromLocation = () => {
+        if (locationPermission) return;
+
+        webapp.LocationManager.getLocation((data) => {
+            const { speed } = data; // Скорость в метрах/секунду
+            setCurrentSpeed(speed);
+        });
     };
 
-    const handleAccelerometer = function(this: AccelerometerEvent) {
-        const { x, y, z } = webapp.Accelerometer;
-        
-        // Calculate acceleration magnitude
-        const magnitude = Math.sqrt(x * x + y * y + z * z);
-        const filteredMagnitude = lowPassFilter(magnitude, prevAccelMagnitude.current);
+    // Подсчёт шага на основе акселерометра и гироскопа
+    const detectStep = () => {
+        const accel = webapp.Accelerometer;
+        const gyro = webapp.Gyroscope;
 
-        // console.log('this >>>> ', this);
-        // console.log('magnitude >>>> ', magnitude);
-        // console.log('filteredMagnitude >>>> ', filteredMagnitude);
+        // Рассчитаем модуль ускорения
+        const acceleration = Math.sqrt(accel.x * accel.x + accel.y * accel.y + accel.z * accel.z);
 
-        const now = Date.now();
-        const timeDiff = now - lastStepTime.current;
+        // Рассчитаем модуль вращения
+        const rotation = Math.sqrt(gyro.x * gyro.x + gyro.y * gyro.y + gyro.z * gyro.z);
 
-        // Detect step based on acceleration and rotation
-        // Note: We don't require speed check if location permission is denied
-        if (Math.abs(filteredMagnitude - prevAccelMagnitude.current) > ACCEL_THRESHOLD && 
-            timeDiff > 250 && // Minimum 250ms between steps
-            isRotating.current) {
-            console.log('steps', stepCount);
-            setStepCount(prev => prev + 1);
-            lastStepTime.current = now;
-            setIsMoving(true);
-        } else if (timeDiff > 1000) {
-            setIsMoving(false);
-        }
+        // Фильтруем шумы акселерометра (low-pass filter)
+        const filteredAccel = LOW_PASS_ALPHA * acceleration + (1 - LOW_PASS_ALPHA) * lastAcceleration.current.z;
+        lastAcceleration.current = { ...accel, z: filteredAccel };
 
-        prevAccelMagnitude.current = filteredMagnitude;
-    };
+        // Сохраняем текущую вращательную активность
+        lastRotation.current = rotation;
 
-    const handleGyroscope = function(this: GyroscopeData) {
-        const { x, y, z } = webapp.Gyroscope;
-        
-        // Detect rotation based on beta (forward/backward tilt) and gamma (left/right tilt)
-        const rotationMagnitude = Math.sqrt(x * x + y * y + z * z);
-
-        // console.log('rotationMagnitude >>>> ', rotationMagnitude);
-        isRotating.current = rotationMagnitude > GYRO_THRESHOLD;
-    };
-
-    const handleLocation = function(this: LocationData) {
-        // console.log('this.speed >>>> ', this.speed);
-        if (this.speed !== null) {
-            currentSpeed.current = this.speed;
-            setIsMoving(this.speed > SPEED_THRESHOLD);
+        // Условие для подсчёта шага
+        if (
+            Math.abs(filteredAccel - 9.8) > ACCEL_THRESHOLD && // Ускорение превышает порог
+            rotation > GYRO_THRESHOLD && // Вращение превышает порог
+            currentSpeed !== null && currentSpeed > SPEED_THRESHOLD // Скорость больше порога
+        ) {
+            setStepCount((prev) => prev + 1);
         }
     };
 
-    const requestLocationPermission = function (this: LocationData) {
-        console.log('this.isLocationAvailable >>>>>> ', this.isLocationAvailable);
-        console.log('this.isAccessGranted >>>>>> ', this.isAccessGranted);
-        setLocationPermission(this.isLocationAvailable && this.isAccessGranted);
-    };
-
+    // Инициализация сенсоров
     useEffect(() => {
         if (!window.Telegram || !window.Telegram.WebApp) {
             console.warn("Telegram WebApp API недоступен.");
             return;
         }
-        
-        // Check if sensors are available
+
+        // Проверка наличия сенсоров
         const checkSensors = () => {
             const hasAccel = Boolean(webapp.Accelerometer);
             const hasGyro = Boolean(webapp.Gyroscope);
@@ -147,51 +85,56 @@ const useStepCounter = () => {
             return hasAccel && hasGyro && hasLocation;
         };
 
-        // Initialize sensors
+        // Инициализация сенсоров
         const initSensors = () => {
             if (!checkSensors()) {
-                console.warn('Some sensors are not available');
+                console.warn("Some sensors are not available");
                 return;
             }
 
-            // Start motion sensors
-            webapp.Accelerometer.start({}, () => {console.log('Accelerometer started')});
+            // Запуск сенсоров
+            webapp.Accelerometer.start();
             webapp.Gyroscope.start();
 
-            // Add motion event listeners
-            webapp.onEvent('accelerometerChanged', handleAccelerometer);
-            webapp.onEvent('gyroscopeChanged', handleGyroscope);
+            // Слушатели событий
+            webapp.onEvent('accelerometerChanged', detectStep);
 
+            // Инициализация геолокации
             webapp.LocationManager.init(() => {
-                console.log('LocationManager inited');
-                webapp.LocationManager.getLocation((data) => {
-                    console.log('data >>>> ', data)
-                })
+                const { isInited, isLocationAvailable, isAccessGranted } = webapp.LocationManager;
+                setLocationPermission(isInited && isLocationAvailable && isAccessGranted);
+
+                // Получение начальной скорости
+                updateSpeedFromLocation();
+
+                // Обновление скорости с периодичностью
+                const locationInterval = setInterval(updateSpeedFromLocation, 1000); // Обновляем каждую секунду
+
+                // Очистка интервала при размонтировании
+                return () => clearInterval(locationInterval);
             });
-            webapp.onEvent('locationManagerUpdated', handleLocation);
         };
 
-        // Wait for WebApp to be ready
-        // webapp.ready();
+        // Ожидаем готовности WebApp и инициализируем сенсоры
         initSensors();
 
-        // Cleanup
+        // Очистка после размонтирования
         return () => {
             if (sensorsAvailable) {
                 webapp.Accelerometer.stop();
                 webapp.Gyroscope.stop();
-                
-                webapp.offEvent('accelerometerChanged', handleAccelerometer);
-                webapp.offEvent('gyroscopeChanged', handleGyroscope);
+
+                webapp.offEvent('accelerometerChanged', detectStep);
             }
         };
     }, []);
 
     return {
         stepCount,
-        isMoving,
+        isMoving: stepCount > 0, // Если шаги фиксируются, пользователь движется
         sensorsAvailable,
-        locationPermission
+        locationPermission,
+        currentSpeed,
     };
 };
 
