@@ -58,6 +58,10 @@ const useStepCounter = () => {
         // Сохраняем текущую вращательную активность
         lastRotation.current = rotation;
 
+        console.log('acceleration >>>> ', acceleration);
+        console.log('rotation >>>> ', rotation);
+        console.log('currentSpeed >>>> ', currentSpeed);
+
         // Условие для подсчёта шага
         if (
             Math.abs(filteredAccel - 9.8) > ACCEL_THRESHOLD && // Ускорение превышает порог
