@@ -71,7 +71,8 @@ const useStepCounter = () => {
             rotation > GYRO_THRESHOLD && // Вращение превышает порог
             currentSpeed !== null // Скорость больше порога
         ) {
-            setStepCount((prev) => prev + 1);
+            console.log('stepCount >>>>>> ', stepCount);
+            setStepCount(stepCount + 1);
         }
     };
 
