@@ -168,7 +168,7 @@ const useStepCounter = () => {
                     console.log('data >>>> ', data)
                 })
             });
-            webapp.onEvent('locationRequested', handleLocation);
+            webapp.onEvent('locationManagerUpdated', handleLocation);
         };
 
         // Wait for WebApp to be ready
