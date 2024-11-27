@@ -38,6 +38,7 @@ const useStepCounter = () => {
         webapp.LocationManager.getLocation((data) => {
             console.log('data >>>>> ', data);
             const { speed } = data; // Скорость в метрах/секунду
+            console.log('speed >>>>> ', speed);
             setCurrentSpeed(speed);
         });
     };
@@ -60,7 +61,7 @@ const useStepCounter = () => {
         // Сохраняем текущую вращательную активность
         lastRotation.current = rotation;
 
-        console.log('acceleration >>>> ', acceleration);
+        console.log('filteredAccel >>>> ', filteredAccel);
         console.log('rotation >>>> ', rotation);
         console.log('currentSpeed >>>> ', currentSpeed);
 
@@ -108,6 +109,9 @@ const useStepCounter = () => {
             // Инициализация геолокации
             webapp.LocationManager.init(() => {
                 const { isInited, isLocationAvailable, isAccessGranted } = webapp.LocationManager;
+
+                console.log('webapp.LocationManager >>>>> ', webapp.LocationManager);
+
                 setLocationPermission(isInited && isLocationAvailable && isAccessGranted);
 
                 // Получение начальной скорости
