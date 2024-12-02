@@ -25,7 +25,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
     const startTimeRef = useRef<number>();
     const lastStepTimeRef = useRef<number>();
     
-    const CIRCLE_RADIUS = 140;
+    const CIRCLE_RADIUS = 135;
     const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * CIRCLE_RADIUS;
     
     useEffect(() => {
