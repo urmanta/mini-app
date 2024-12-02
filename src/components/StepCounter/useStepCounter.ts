@@ -69,8 +69,8 @@ const useStepCounter = () => {
         // Условие для подсчёта шага
         if (
             Math.abs(filteredAccel - 9.8) > ACCEL_THRESHOLD && // Ускорение превышает порог
-            rotation > GYRO_THRESHOLD // Вращение превышает порог
-            // currentSpeed !== null // Скорость больше порога
+            rotation > GYRO_THRESHOLD && // Вращение превышает порог
+            currentSpeed !== null && currentSpeed > SPEED_THRESHOLD // Скорость больше порога
         ) {
             setStepCount((prev) => prev + 1);
         }

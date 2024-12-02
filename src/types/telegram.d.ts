@@ -29,6 +29,7 @@ interface Window {
             LocationManager: {
                 init: (callback: () => void) => void;
                 getLocation: (callback: (data: LocationData) => void) => void;
+                openSettings: () => void;
                 isLocationAvailable: boolean;
                 isAccessRequested: boolean;
                 isAccessGranted: boolean;
