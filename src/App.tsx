@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { TimerProvider } from './context/TimerContext';
 import './App.css';
 
 import Navigation from './components/Navigation';
@@ -11,16 +12,18 @@ import AboutPage from './pages/AboutPage';
 const App = () => {
     return (
         <Router>
-            <div className="App">
-                <Routes>
-                    <Route path="/tasks" element={<TasksPage />} />
-                    <Route path="/upgrade" element={<UpgradePage />} />
-                    <Route path="/" element={<MovePage />} />
-                    <Route path="/statistics" element={<StatisticsPage />} />
-                    <Route path="/about" element={<AboutPage />} />
-                </Routes>
-                <Navigation />
-            </div>
+            <TimerProvider>
+                <div className="App">
+                    <Routes>
+                        <Route path="/tasks" element={<TasksPage />} />
+                        <Route path="/upgrade" element={<UpgradePage />} />
+                        <Route path="/" element={<MovePage />} />
+                        <Route path="/statistics" element={<StatisticsPage />} />
+                        <Route path="/about" element={<AboutPage />} />
+                    </Routes>
+                    <Navigation />
+                </div>
+            </TimerProvider>
         </Router>
     );
 };

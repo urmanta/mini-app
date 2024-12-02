@@ -1,0 +1,154 @@
+.circular-timer {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    font-family: 'Orbitron', sans-serif;
+}
+
+.timer-background {
+    fill: none;
+    stroke-width: 24;
+    opacity: 0.8;
+}
+
+.timer-progress {
+    fill: none;
+    stroke: var(--tg-theme-button-color, #4dd0e1);
+    stroke-width: 15;
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    transition: stroke-dashoffset 0.3s ease;
+    filter: drop-shadow(0 0 3px var(--tg-theme-button-color, #4dd0e1));
+}
+
+.timer-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.countdown {
+    font-size: 6rem;
+    font-weight: bold;
+    color: var(--tg-theme-button-color, #4dd0e1);
+    animation: pulse 1s infinite;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.start-button {
+    background-color: var(--tg-theme-button-color, #4dd0e1);
+    color: var(--tg-theme-button-text-color, #ffffff);
+    border: none;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(77, 208, 225, 0.3);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.start-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(77, 208, 225, 0.4);
+}
+
+.start-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.speed {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--tg-theme-button-color, #4dd0e1);
+    margin-bottom: 0.8rem;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.speed-value {
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--tg-theme-button-color, #4dd0e1);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.energy {
+    font-size: 1.2rem;
+    color: var(--tg-theme-text-color, #ffffff);
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.time-left {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--tg-theme-text-color, #ffffff);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.stop-button {
+    background-color: transparent;
+    border: 2px solid var(--tg-theme-button-color, #4dd0e1);
+    color: var(--tg-theme-button-color, #4dd0e1);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.stop-button:hover {
+    background-color: var(--tg-theme-button-color, #4dd0e1);
+    color: var(--tg-theme-button-text-color, #ffffff);
+}
+
+.spark {
+    fill: var(--tg-theme-button-color, #4dd0e1);
+    opacity: 0;
+}
+
+.spark-animation {
+    animation: sparkle 1s ease-out forwards;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes sparkle {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
