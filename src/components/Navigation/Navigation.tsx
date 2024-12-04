@@ -19,8 +19,7 @@ const Navigation = () => {
             </NavLink>
             <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                 <div className="nav-item">
-                    <FaWalking className="nav-icon" />
-                    <span className="nav-text">Move</span>
+                    <FaWalking className="nav-icon-main" />
                 </div>
             </NavLink>
             <NavLink to="/statistics" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>

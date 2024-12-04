@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 0.5rem;
+    padding: 0.5rem 0.5rem 1.5rem;
     background-color: var(--tg-theme-secondary-bg-color, #1a1a1a);
     position: fixed;
     bottom: 0;
@@ -34,6 +34,10 @@
 .nav-icon {
     font-size: 1.3rem;
     margin-bottom: 2px;
+}
+
+.nav-icon-main {
+    font-size: 3rem;
 }
 
 .nav-text {

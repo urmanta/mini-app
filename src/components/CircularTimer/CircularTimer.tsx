@@ -1,32 +1,36 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useLayoutEffect,useEffect, useRef } from 'react';
 import { useTimer } from '../../context/TimerContext';
+import { FaWalking } from 'react-icons/fa';
 import './CircularTimer.css';
 
 interface CircularTimerProps {
-    energy: number;
+    duration: number;
     onComplete: () => void;
     onSpeedUpdate: (speed: number) => void;
 }
 
 const CircularTimer: React.FC<CircularTimerProps> = ({
-    energy,
+    duration,
     onComplete,
     onSpeedUpdate
 }) => {
-    const { timeLeft, isRunning, setIsRunning } = useTimer();
+    const { timeLeft, setTimeLeft, isRunning, setIsRunning } = useTimer();
     const [countdown, setCountdown] = useState(3);
     const [showCountdown, setShowCountdown] = useState(false);
     const [speed, setSpeed] = useState(0);
     const [canStop, setCanStop] = useState(false);
     
     const circleRef = useRef<SVGCircleElement>(null);
-    const sparkRef = useRef<SVGPathElement>(null);
     const animationFrameRef = useRef<number>();
     const startTimeRef = useRef<number>();
     const lastStepTimeRef = useRef<number>();
     
-    const CIRCLE_RADIUS = 135;
+    const CIRCLE_RADIUS = 165;
     const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * CIRCLE_RADIUS;
+    
+    useLayoutEffect(() => {
+        setTimeLeft(duration);
+    }, [duration]);
     
     useEffect(() => {
         if (timeLeft <= 0) {
@@ -37,7 +41,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
     }, [timeLeft]);
 
     useEffect(() => {
-        if (isRunning && timeLeft <= 600 - 600) { // 600 seconds = 10 minutes
+        if (isRunning && timeLeft <= 0) {
             setCanStop(true);
         }
     }, [isRunning, timeLeft]);
@@ -76,9 +80,6 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
 
     const handleComplete = () => {
         setIsRunning(false);
-        if (sparkRef.current) {
-            sparkRef.current.classList.add('spark-animation');
-        }
         onComplete();
         if (animationFrameRef.current) {
             cancelAnimationFrame(animationFrameRef.current);
@@ -91,12 +92,12 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
         }
     };
 
-    const progress = timeLeft / 600;
+    const progress = timeLeft / duration;
     const dashOffset = CIRCLE_CIRCUMFERENCE * (1 - progress);
 
     return (
         <div className="circular-timer">
-            <svg width="300" height="300" viewBox="0 0 300 300">
+            <svg width="350" height="350" viewBox="0 0 350 350">
                 {/* Gradient definitions */}
                 <defs>
                     <radialGradient id="progressGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
@@ -133,8 +134,8 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
                 </defs>
                 {/* Background circle */}
                 <circle
-                    cx="150"
-                    cy="150"
+                    cx="175"
+                    cy="175"
                     r={CIRCLE_RADIUS}
                     className="timer-background"
                     stroke="url(#backgroundGradient)"
@@ -143,8 +144,8 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
                 {/* Progress circle */}
                 <circle
                     ref={circleRef}
-                    cx="150"
-                    cy="150"
+                    cx="175"
+                    cy="175"
                     r={CIRCLE_RADIUS}
                     className="timer-progress"
                     style={{
@@ -153,7 +154,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
                     }}
                     stroke="url(#progressGradient)"
                     filter="url(#outerGlow)"
-                    transform="rotate(-90 150 150)"
+                    transform="rotate(-90 175 175)"
                 />
             </svg>
             
@@ -166,7 +167,8 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
                         onClick={handleStart}
                         disabled={isRunning}
                     >
-                        Start
+                        <FaWalking className="start-button-icon" />
+                        <div className="start-button-text">Start</div>
                     </button>
                 ) : (
                     <>

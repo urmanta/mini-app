@@ -3,8 +3,6 @@ import CircularTimer from '../components/CircularTimer';
 import './MovePage.css';
 
 const MovePage = () => {
-    // In a real app, this would come from your backend
-    const [energy] = useState(100);
     const [currentSpeed, setCurrentSpeed] = useState(0);
     
     const handleComplete = useCallback(() => {
@@ -21,8 +19,7 @@ const MovePage = () => {
             <h1>Stride</h1>
             <div className="timer-container">
                 <CircularTimer
-                    duration={600} // 10 minutes in seconds
-                    energy={energy}
+                    duration={6000}
                     onComplete={handleComplete}
                     onSpeedUpdate={handleSpeedUpdate}
                 />

@@ -1,7 +1,7 @@
 .circular-timer {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 350px;
     margin: 0 auto;
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
     font-family: 'Orbitron', sans-serif;
@@ -9,14 +9,14 @@
 
 .timer-background {
     fill: none;
-    stroke-width: 24;
+    stroke-width: 4;
     opacity: 0.8;
 }
 
 .timer-progress {
     fill: none;
     stroke: var(--tg-theme-button-color, #4dd0e1);
-    stroke-width: 15;
+    stroke-width: 8;
     stroke-linecap: round;
     transform: rotate(-90deg);
     transform-origin: center;
@@ -30,7 +30,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    width: 80%;
+    width: 100%;
     font-family: 'Orbitron', sans-serif;
 }
 
@@ -43,17 +43,17 @@
 }
 
 .start-button {
-    background-color: var(--tg-theme-button-color, #4dd0e1);
+    background-color: transparent;
     color: var(--tg-theme-button-text-color, #ffffff);
     border: none;
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    font-size: 1.5rem;
+    width: 325px;
+    height: 325px;
+    font-size: 5rem;
+    line-height: 5rem;
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(77, 208, 225, 0.3);
     font-family: 'Orbitron', sans-serif;
 }
 
@@ -65,6 +65,14 @@
 .start-button:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+}
+
+.start-button-icon {
+    font-size: 3rem;
+}
+
+.start-button-text {
+    margin-bottom: 4rem;
 }
 
 .speed {
