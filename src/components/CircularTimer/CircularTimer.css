@@ -21,7 +21,12 @@
     transform: rotate(-90deg);
     transform-origin: center;
     transition: stroke-dashoffset 0.3s ease;
-    filter: drop-shadow(0 0 3px var(--tg-theme-button-color, #4dd0e1));
+}
+
+.time-marker {
+    stroke: var(--tg-theme-button-color, #4dd0e1);
+    stroke-width: 4;
+    stroke-linecap: round;
 }
 
 .timer-content {

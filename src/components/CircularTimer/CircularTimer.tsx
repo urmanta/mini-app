@@ -28,6 +28,13 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
     const CIRCLE_RADIUS = 165;
     const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * CIRCLE_RADIUS;
     
+    // Calculate marker position for 10 minutes (600 seconds)
+    const tenMinutesAngle = -90 - (600 / duration * 360);
+    const markerOuterX = 175 + (CIRCLE_RADIUS + 8) * Math.cos(tenMinutesAngle * Math.PI / 180);
+    const markerInnerX = 175 + (CIRCLE_RADIUS - 8) * Math.cos(tenMinutesAngle * Math.PI / 180);
+    const markerOuterY = 175 + (CIRCLE_RADIUS + 8) * Math.sin(tenMinutesAngle * Math.PI / 180);
+    const markerInnerY = 175 + (CIRCLE_RADIUS - 8) * Math.sin(tenMinutesAngle * Math.PI / 180);
+    
     useLayoutEffect(() => {
         setTimeLeft(duration);
     }, [duration]);
@@ -122,15 +129,6 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
                             <feMergeNode in="final" />
                         </feMerge>
                     </filter>
-                    <filter id="outerGlow" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
-                        <feFlood flood-color="#4dd0e1" flood-opacity="0.3" result="color" />
-                        <feComposite in="color" in2="blur" operator="in" result="glow" />
-                        <feMerge>
-                            <feMergeNode in="glow" />
-                            <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                    </filter>
                 </defs>
                 {/* Background circle */}
                 <circle
@@ -153,9 +151,18 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
                         strokeDashoffset: dashOffset
                     }}
                     stroke="url(#progressGradient)"
-                    filter="url(#outerGlow)"
                     transform="rotate(-90 175 175)"
                 />
+                {/* 10-minute marker */}
+                {duration > 600 && (
+                    <line
+                        x1={markerInnerX}
+                        y1={markerInnerY}
+                        x2={markerOuterX}
+                        y2={markerOuterY}
+                        className="time-marker"
+                    />
+                )}
             </svg>
             
             <div className="timer-content">

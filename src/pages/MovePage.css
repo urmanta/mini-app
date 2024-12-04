@@ -7,15 +7,8 @@
     background-color: var(--tg-theme-bg-color, #121212);
 }
 
-.move-page h1 {
-    color: var(--tg-theme-text-color, #ffffff);
-    margin-bottom: 2rem;
-    font-size: 2rem;
-    font-weight: 600;
-}
-
 .timer-container {
-    margin-bottom: 2rem;
+    margin: 2rem 0;
 }
 
 .stats {

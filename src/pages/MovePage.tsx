@@ -19,10 +19,9 @@ const MovePage = () => {
     return (
         <div className="move-page">
             <StrideCoins coins={coins} />
-            <h1>Stride</h1>
             <div className="timer-container">
                 <CircularTimer
-                    duration={1200}
+                    duration={1500}
                     onComplete={handleComplete}
                     onSpeedUpdate={handleSpeedUpdate}
                 />
