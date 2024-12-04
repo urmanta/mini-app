@@ -172,7 +172,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
                     </button>
                 ) : (
                     <>
-                        <div className="speed"><div className="speed-value">{speed}</div>км/ч</div>
+                        <div className="speed"><div className="speed-value">{speed}</div>km/h</div>
                         <div className="time-left">
                             {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
                         </div>
