@@ -10,7 +10,7 @@
     border-radius: 2rem;
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    color: var(--tg-theme-button-text-color, #ffffff);
+    color: var(--button-text-color, #ffffff);
     font-family: 'Orbitron', sans-serif;
     z-index: 1000;
 }

@@ -3,7 +3,7 @@
     justify-content: space-around;
     align-items: center;
     padding: 0.5rem 0.5rem 1.5rem;
-    background-color: var(--tg-theme-secondary-bg-color, #1a1a1a);
+    background-color: var(--secondary-bg-color, #1a1a1a);
     position: fixed;
     bottom: 0;
     left: 0;
@@ -16,7 +16,7 @@
 
 .nav-link {
     text-decoration: none;
-    color: var(--tg-theme-hint-color, #8c8c8c);
+    color: var(--hint-color, #8c8c8c);
     padding: 0.5rem;
     border-radius: 12px;
     transition: all 0.3s ease;
@@ -46,7 +46,7 @@
 }
 
 .nav-link.active {
-    color: var(--tg-theme-button-color, #4dd0e1);
+    color: var(--button-color, #4dd0e1);
     background-color: rgba(36, 129, 204, 0.1);
 }
 

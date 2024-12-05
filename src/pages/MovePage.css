@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--tg-theme-bg-color, #121212);
+    background-color: var(--bg-color, #121212);
 }
 
 .timer-container {
@@ -18,7 +18,7 @@
     flex-direction: column;
     gap: 1rem;
     padding: 1.5rem;
-    background-color: var(--tg-theme-secondary-bg-color, #1a1a1a);
+    background-color: var(--secondary-bg-color, #1a1a1a);
     border-radius: 16px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
@@ -30,12 +30,12 @@
 }
 
 .stat-label {
-    color: var(--tg-theme-hint-color, #8c8c8c);
+    color: var(--hint-color, #8c8c8c);
     font-size: 0.9rem;
 }
 
 .stat-value {
-    color: var(--tg-theme-text-color, #ffffff);
+    color: var(--text-color, #ffffff);
     font-size: 1.1rem;
     font-weight: 600;
 }
