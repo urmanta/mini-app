@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import { FaTasks, FaCrown, FaChartBar, FaWalking, FaInfoCircle } from 'react-icons/fa';
+import Logo from '../Logo';
+import { FaTasks, FaCrown, FaChartBar, FaInfoCircle } from 'react-icons/fa';
 import './Navigation.css';
 
 const Navigation = () => {
@@ -19,7 +20,7 @@ const Navigation = () => {
             </NavLink>
             <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                 <div className="nav-item">
-                    <FaWalking className="nav-icon-main" />
+                    <Logo className="nav-icon-main" />
                 </div>
             </NavLink>
             <NavLink to="/statistics" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>

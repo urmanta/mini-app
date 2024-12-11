@@ -72,8 +72,8 @@
     cursor: not-allowed;
 }
 
-.start-button-icon {
-    font-size: 3rem;
+.start-button svg {
+    height: 5rem;
 }
 
 .start-button-text {

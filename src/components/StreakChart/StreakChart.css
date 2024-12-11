@@ -1,9 +1,7 @@
 .streak-chart-container {
   width: 100%;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  margin-top: 20px;
 }
 
 .streak-stats {
@@ -27,8 +25,11 @@
 .streak-value {
   font-size: 20px;
   color: #fff;
-  font-family: 'Orbitron', sans-serif;
   margin-bottom: 10px;
+}
+
+.streak-value b {
+  font-family: 'Orbitron', sans-serif;
 }
 
 .streak-chart {
@@ -62,7 +63,7 @@
 }
 
 .streak-bar.not-earned {
-  background: #d2e6f0;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .streak-coins {
@@ -78,7 +79,7 @@
   color: #FFC107;
   font-size: 10px;
   position: absolute;
-  top: 57px;
+  top: 60px;
 }
 
 .walking-icon {

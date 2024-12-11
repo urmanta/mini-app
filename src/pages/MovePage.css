@@ -7,10 +7,6 @@
     background-color: var(--bg-color, #121212);
 }
 
-.timer-container {
-    margin: 2rem 0;
-}
-
 .stats {
     width: 100%;
     max-width: 300px;

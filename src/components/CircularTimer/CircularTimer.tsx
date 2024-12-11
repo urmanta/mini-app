@@ -1,6 +1,6 @@
 import React, { useState, useLayoutEffect,useEffect, useRef } from 'react';
 import { useTimer } from '../../context/TimerContext';
-import { FaWalking } from 'react-icons/fa';
+import Logo from '../Logo';
 import './CircularTimer.css';
 
 interface CircularTimerProps {
@@ -174,7 +174,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
                         onClick={handleStart}
                         disabled={isRunning}
                     >
-                        <FaWalking className="start-button-icon" />
+                        <Logo className="start-button-icon" />
                         <div className="start-button-text">Start</div>
                     </button>
                 ) : (

@@ -37,7 +37,9 @@ const StreakChart: React.FC = () => {
     <div className="streak-chart-container">
       <div className="streak-stats">
         <div className="streak-stat">
-          <span className="streak-value">{streakData.current_streak}th day in the row! Don't stop!</span>
+          <span className="streak-value">
+            The <b>{streakData.current_streak}th</b> day in a row!
+          </span>
         </div>
       </div>
       <div className="streak-chart">
@@ -54,7 +56,7 @@ const StreakChart: React.FC = () => {
             <div
               className={`streak-bar ${day.coinsEarned > 0 ? 'earned' : 'not-earned'}`}
               style={{
-                height: `${day.coinsEarned > 0 ? (day.coinsEarned / maxCoins) * 100 : 66.67}%`,
+                height: `${day.coinsEarned > 0 ? (day.coinsEarned / maxCoins) * 100 : 50}%`,
               }}
             />
             <div className="streak-coins" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>

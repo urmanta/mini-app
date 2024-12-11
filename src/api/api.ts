@@ -9,49 +9,49 @@ export const getStreakHistory = (): Promise<StreakHistoryResponse> => {
       {
         date: '2024-11-26',
         isCurrent: false,
-        coinsEarned: 15,
+        coinsEarned: 315,
         bonusReceived: true,
         bonusAvailable: false
       },
       {
         date: '2024-11-27',
         isCurrent: false,
-        coinsEarned: 20,
+        coinsEarned: 200,
         bonusReceived: true,
         bonusAvailable: false
       },
       {
         date: '2024-11-28',
         isCurrent: false,
-        coinsEarned: 25,
+        coinsEarned: 425,
         bonusReceived: true,
         bonusAvailable: false
       },
       {
         date: '2024-11-29',
         isCurrent: false,
-        coinsEarned: 30,
+        coinsEarned: 280,
         bonusReceived: true,
         bonusAvailable: false
       },
       {
         date: '2024-11-30',
         isCurrent: false,
-        coinsEarned: 35,
+        coinsEarned: 350,
         bonusReceived: true,
         bonusAvailable: true
       },
       {
         date: '2024-12-01',
         isCurrent: false,
-        coinsEarned: 40,
+        coinsEarned: 80,
         bonusReceived: true,
         bonusAvailable: false
       },
       {
         date: '2024-12-02',
         isCurrent: false,
-        coinsEarned: 45,
+        coinsEarned: 115,
         bonusReceived: true,
         bonusAvailable: false
       },
@@ -80,7 +80,7 @@ export const getStreakHistory = (): Promise<StreakHistoryResponse> => {
         date: '2024-12-06',
         isCurrent: false,
         coinsEarned: 0,
-        bonusReceived: false,
+        bonusReceived: true,
         bonusAvailable: true
       },
       {
