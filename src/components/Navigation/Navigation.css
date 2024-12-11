@@ -24,6 +24,16 @@
     max-width: 80px;
 }
 
+.nav-link-main {
+    border-radius: 50%;
+    margin-top: -1rem;
+    background-color: var(--secondary-bg-color, #1a1a1a);
+}
+
+.nav-link-main.active {
+    border: 3px solid var(--button-color, #4dd0e1);
+}
+
 .nav-item {
     display: flex;
     flex-direction: column;
@@ -36,10 +46,6 @@
     margin-bottom: 2px;
 }
 
-.nav-icon-main {
-    font-size: 3rem;
-}
-
 .nav-text {
     font-size: 0.7rem;
     font-weight: 500;
@@ -47,9 +53,9 @@
 
 .nav-link.active {
     color: var(--button-color, #4dd0e1);
-    background-color: rgba(36, 129, 204, 0.1);
+    background-color: #1b242c;
 }
 
 .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: #252525;
 }

@@ -18,9 +18,9 @@ const Navigation = () => {
                     <span className="nav-text">Upgrade</span>
                 </div>
             </NavLink>
-            <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''} nav-link-main`}>
                 <div className="nav-item">
-                    <Logo className="nav-icon-main" />
+                    <Logo />
                 </div>
             </NavLink>
             <NavLink to="/statistics" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
