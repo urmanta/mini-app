@@ -1,15 +1,15 @@
 .stats-block {
-    background-color: var(--secondary-bg-color, #1a1a1a);
+    background-color: var(--secondary-bg-color);
     border-radius: 16px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px var(--shadow-color);
     animation: fadeIn 0.3s ease-in-out;
     width: 100%;
 }
 
 .stats-block h2 {
-    color: var(--button-color, #4dd0e1);
+    color: var(--button-color);
     font-family: 'Orbitron', sans-serif;
     font-size: 1.2rem;
     margin-bottom: 1rem;
@@ -24,20 +24,20 @@
 .stat-item {
     text-align: center;
     padding: 1rem;
-    background-color: #1b242c;
+    background-color: var(--tertiary-bg-color);
     border-radius: 12px;
     flex-direction: column;
 }
 
 .stat-value {
-    color: var(--button-color, #4dd0e1);
+    color: var(--button-color);
     font-size: 1.1rem;
     font-weight: 600;
     font-family: 'Orbitron', sans-serif;
 }
 
 .stat-label {
-    color: var(--hint-color, #8c8c8c);
+    color: var(--hint-color);
     font-size: 0.9rem;
 }
 
@@ -59,12 +59,12 @@
     padding: 0.8rem;
     border-radius: 8px;
     margin-bottom: 0.5rem;
-    background-color: #1b242c;
+    background-color: var(--tertiary-bg-color);
     transition: background-color 0.2s ease;
 }
 
 .referral-name {
-    color: var(--text-color, #ffffff);
+    color: var(--text-color);
     font-size: 1rem;
     display: flex;
     align-items: center;
@@ -72,7 +72,7 @@
 }
 
 .referral-coins {
-    color: var(--button-color, #4dd0e1);
+    color: var(--button-color);
     font-family: 'Orbitron', sans-serif;
     font-weight: 600;
     display: flex;
@@ -87,8 +87,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color: rgba(77, 208, 225, 0.2);
-    color: var(--button-color, #4dd0e1);
+    background-color: var(--overlay-light);
+    color: var(--button-color);
     font-size: 0.8rem;
     font-family: 'Orbitron', sans-serif;
 }

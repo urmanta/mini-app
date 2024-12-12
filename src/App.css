@@ -1,14 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
 :root {
-    /* Fallback dark theme colors if Telegram theme is not available */
+    /* Base theme colors */
     --bg-color: #121212;
+    --secondary-bg-color: #1a1a1a;
+    --tertiary-bg-color: #1b242c;
+    --border-color: #252525;
+
+    /* Text colors */
     --text-color: #ffffff;
     --hint-color: #8c8c8c;
     --link-color: #2481cc;
+
+    /* Brand colors */
     --button-color: #4dd0e1;
     --button-text-color: #ffffff;
-    --secondary-bg-color: #1a1a1a;
+    --coin-color: #FFD700;
+
+    /* Overlay colors */
+    --overlay-light: rgba(77, 208, 225, 0.1);
+    --overlay-lighter: rgba(77, 208, 225, 0.05);
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --button-shadow: rgba(77, 208, 225, 0.4);
 }
 
 * {
@@ -22,8 +35,8 @@ body {
         Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: var(--bg-color, #121212);
-    color: var(--text-color, #ffffff);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
     padding: 0;
     display: flex;
@@ -35,8 +48,8 @@ body {
     text-align: center;
     min-height: 100vh;
     padding-bottom: 80px; /* Space for fixed navigation */
-    background-color: var(--bg-color, #121212);
-    color: var(--text-color, #ffffff);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     box-sizing: border-box;
 }
 
@@ -48,7 +61,7 @@ body {
 }
 
 h1 {
-    color: var(--text-color, #ffffff);
+    color: var(--text-color);
     font-family: 'Orbitron', sans-serif;
     margin-bottom: 1.5rem;
     font-size: 2.5rem;
@@ -80,7 +93,7 @@ h1 {
 }
 
 .card.show {
-    background-color: var(--card-color);
+    background-color: var(--button-color);
 }
 
 .info {
