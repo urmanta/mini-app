@@ -1,0 +1,94 @@
+.stats-block {
+    background-color: var(--secondary-bg-color, #1a1a1a);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+    width: 100%;
+}
+
+.stats-block h2 {
+    color: var(--button-color, #4dd0e1);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.global-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    background-color: #1b242c;
+    border-radius: 12px;
+    flex-direction: column;
+}
+
+.stat-value {
+    color: var(--button-color, #4dd0e1);
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.stat-label {
+    color: var(--hint-color, #8c8c8c);
+    font-size: 0.9rem;
+}
+
+.personal-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.referral-list {
+    list-style: none;
+    padding: 0;
+}
+
+.referral-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    background-color: #1b242c;
+    transition: background-color 0.2s ease;
+}
+
+.referral-name {
+    color: var(--text-color, #ffffff);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.referral-coins {
+    color: var(--button-color, #4dd0e1);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.position-indicator {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(77, 208, 225, 0.2);
+    color: var(--button-color, #4dd0e1);
+    font-size: 0.8rem;
+    font-family: 'Orbitron', sans-serif;
+}
