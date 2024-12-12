@@ -59,7 +59,7 @@ const TasksPage = () => {
     ]);
 
     return (
-        <div className="tasks-page">
+        <div className="page">
             <h1>Tasks</h1>
             <div className="tasks-list">
                 {tasks.map((task) => (

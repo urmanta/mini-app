@@ -1,3 +1,15 @@
+interface PopupButton {
+    type: 'default' | 'ok' | 'close' | 'cancel' | 'destructive';
+    text: string;
+    id?: string;
+}
+
+interface PopupParams {
+    title?: string;
+    message: string;
+    buttons?: PopupButton[];
+}
+
 interface LocationData {
     isInited: boolean;
     isLocationAvailable: boolean;
@@ -35,6 +47,7 @@ interface Window {
                 isAccessGranted: boolean;
                 isInited: boolean;
             };
+            showPopup: (params: PopupParams) => Promise<string>;
             onEvent: (eventType: string, callback: () => void) => void;
             offEvent: (eventType: string, callback: () => void) => void;
             ready: () => void;
