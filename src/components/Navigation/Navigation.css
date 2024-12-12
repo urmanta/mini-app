@@ -27,12 +27,12 @@
 .nav-link-main {
     border-radius: 50%;
     margin-top: -1rem;
-    outline: 1px solid #8c8c8c;
+    border: 3px solid #252525;
     background-color: var(--secondary-bg-color, #1a1a1a);
 }
 
 .nav-link-main.active {
-    outline: 3px solid var(--button-color, #4dd0e1);
+    border: 3px solid var(--button-color, #4dd0e1);
 }
 
 .nav-item {
