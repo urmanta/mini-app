@@ -44,7 +44,7 @@ export const getStreakHistory = (): Promise<StreakHistoryResponse> => {
       {
         date: '2024-12-01',
         isCurrent: false,
-        coinsEarned: 80,
+        coinsEarned: 100,
         bonusReceived: true,
         bonusAvailable: false
       },

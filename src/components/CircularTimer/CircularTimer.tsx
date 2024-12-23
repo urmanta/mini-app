@@ -109,7 +109,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
                 <defs>
                     <radialGradient id="progressGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
                         <stop offset="0%" stopColor="#7ee8f4" />
-                        <stop offset="90%" stopColor="#4dd0e1" />
+                        <stop offset="90%" stopColor="#34bbdd" />
                         <stop offset="100%" stopColor="#00bcd4" />
                     </radialGradient>
                     <radialGradient id="backgroundGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
@@ -175,11 +175,15 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
                         disabled={isRunning}
                     >
                         <Logo className="start-button-icon" />
-                        <div className="start-button-text">Start</div>
+                        <div className="start-button-text">START</div>
                     </button>
                 ) : (
                     <>
-                        <div className="speed"><div className="speed-value">{speed}</div>km/h</div>
+                        <div className="speed">
+                            <span className={`speed-value ${speed < 1 || speed > 20 ? 'invalid' : ''}`}>
+                                {speed}
+                            </span> km/h
+                        </div>
                         <div className="time-left">
                             {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
                         </div>

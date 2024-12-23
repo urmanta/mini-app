@@ -15,7 +15,7 @@
 
 .timer-progress {
     fill: none;
-    stroke: var(--button-color, #4dd0e1);
+    stroke: var(--button-color, #34bbdd);
     stroke-width: 8;
     stroke-linecap: round;
     transform: rotate(-90deg);
@@ -24,7 +24,7 @@
 }
 
 .time-marker {
-    stroke: var(--button-color, #4dd0e1);
+    stroke: var(--button-color, #34bbdd);
     stroke-width: 4;
     stroke-linecap: round;
 }
@@ -42,7 +42,7 @@
 .countdown {
     font-size: 6rem;
     font-weight: bold;
-    color: var(--button-color, #4dd0e1);
+    color: var(--button-text-color, #ffffff);
     animation: pulse 1s infinite;
     font-family: 'Orbitron', sans-serif;
 }
@@ -54,7 +54,7 @@
     border-radius: 50%;
     width: 325px;
     height: 325px;
-    font-size: 5rem;
+    font-size: 3.8rem;
     line-height: 5rem;
     font-weight: bold;
     cursor: pointer;
@@ -73,17 +73,17 @@
 }
 
 .start-button svg {
-    height: 5rem;
-}
-
-.start-button-text {
-    margin-bottom: 4rem;
+    height: 4rem;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%)
 }
 
 .speed {
     font-size: 1.8rem;
     font-weight: bold;
-    color: var(--button-color, #4dd0e1);
+    color: var(--button-text-color, #ffffff);
     margin-bottom: 0.8rem;
     font-family: 'Orbitron', sans-serif;
 }
@@ -91,8 +91,11 @@
 .speed-value {
     font-size: 4rem;
     font-weight: bold;
-    color: var(--button-color, #4dd0e1);
     font-family: 'Orbitron', sans-serif;
+}
+
+.speed-value.invalid {
+    color: #ff0000;
 }
 
 .energy {
@@ -112,8 +115,8 @@
 
 .stop-button {
     background-color: transparent;
-    border: 2px solid var(--button-color, #4dd0e1);
-    color: var(--button-color, #4dd0e1);
+    border: 2px solid var(--button-color, #34bbdd);
+    color: var(--button-color, #34bbdd);
     padding: 0.5rem 1.5rem;
     border-radius: 20px;
     margin-top: 1rem;
@@ -123,12 +126,12 @@
 }
 
 .stop-button:hover {
-    background-color: var(--button-color, #4dd0e1);
+    background-color: var(--button-color, #34bbdd);
     color: var(--button-text-color, #ffffff);
 }
 
 .spark {
-    fill: var(--button-color, #4dd0e1);
+    fill: var(--button-color, #34bbdd);
     opacity: 0;
 }
 

@@ -17,13 +17,13 @@
 }
 
 .streak-label {
-  font-size: 14px;
+  font-size: 0.9rem;
   color: #888;
   margin-bottom: 4px;
 }
 
 .streak-value {
-  font-size: 20px;
+  font-size: 1.5rem;
   color: #fff;
   margin-bottom: 10px;
 }
@@ -38,6 +38,8 @@
   align-items: flex-end;
   height: 150px;
   padding: 10px 0;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .streak-bar-wrapper {
@@ -45,7 +47,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 4px;
+  margin: 0 3px;
   height: 150px;
   justify-content: end;
   position: relative;
@@ -59,7 +61,7 @@
 }
 
 .streak-bar.earned {
-  background: var(--button-color, #4dd0e1);
+  background: var(--button-color, #34bbdd);
 }
 
 .streak-bar.not-earned {
@@ -67,10 +69,11 @@
 }
 
 .streak-coins {
-  font-size: 12px;
+  font-size: 14px;
   color: #fff;
   margin-top: 4px;
   font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
   position: absolute;
   bottom: 5px;
 }
@@ -84,7 +87,7 @@
 
 .walking-icon {
   margin-top: 8px;
-  color: var(--button-color, #4dd0e1);
+  color: var(--button-color, #34bbdd);
   font-size: 16px;
   position: absolute;
   top: 100%;

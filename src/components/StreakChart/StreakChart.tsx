@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getStreakHistory } from '../../api/api'
 import { StreakHistoryResponse } from '../../api/types'
-import { FaWalking, FaRegGem } from 'react-icons/fa'
+import { FaWalking, FaPlusCircle } from 'react-icons/fa'
 import './StreakChart.css'
 
 const StreakChart: React.FC = () => {
@@ -46,7 +46,7 @@ const StreakChart: React.FC = () => {
         {streakData.days.map((day) => (
           <div key={day.date} className="streak-bar-wrapper">
             {day.bonusAvailable && (
-              <FaRegGem
+              <FaPlusCircle
                 className="gift-icon"
                 style={{
                   color: day.bonusReceived ? '#f5f5f5' : '#ff0181',

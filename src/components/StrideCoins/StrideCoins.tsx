@@ -9,7 +9,7 @@ interface StrideCoinProps {
 const StrideCoins: React.FC<StrideCoinProps> = ({ coins }) => {
     return (
         <div className="stride-coins">
-            <FaCoins className="coins-icon" />
+            Points:
             <span className="coins-amount">{coins}</span>
         </div>
     );

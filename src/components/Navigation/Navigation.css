@@ -33,7 +33,7 @@
 }
 
 .nav-link-main.active {
-    border: 3px solid var(--button-color, #4dd0e1);
+    border: 3px solid var(--button-color, #34bbdd);
 }
 
 .nav-item {
@@ -54,7 +54,7 @@
 }
 
 .nav-link.active {
-    color: var(--button-color, #4dd0e1);
+    color: var(--button-color, #34bbdd);
     background-color: #1b242c;
 }
 

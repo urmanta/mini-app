@@ -60,7 +60,6 @@ const TasksPage = () => {
 
     return (
         <div className="page">
-            <h1>Tasks</h1>
             <div className="tasks-list">
                 {tasks.map((task) => (
                     <div key={task.id} className="task-item">
@@ -69,7 +68,7 @@ const TasksPage = () => {
                                 <h3>{task.title}</h3>
                             </div>
                             <p>{task.description}</p>
-                            <span className="points">+{task.points} points</span>
+                            <span className="points">+<b>{task.points}</b> points</span>
                         </div>
                         <button 
                             className={`task-button ${task.completed ? 'completed' : ''}`}
