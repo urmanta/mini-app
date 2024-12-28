@@ -110,7 +110,7 @@ const useStepCounter = () => {
         });
 
         // Слушатели событий
-        webapp.onEvent('accelerometerChanged', accumulateData);
+        webapp.onEvent('gyroscopeChanged', accumulateData);
     };
 
     // Очистка после размонтирования
@@ -120,7 +120,7 @@ const useStepCounter = () => {
                 webapp.Accelerometer.stop();
                 webapp.Gyroscope.stop();
 
-                webapp.offEvent('accelerometerChanged', accumulateData);
+                webapp.offEvent('gyroscopeChanged', accumulateData);
             }
         };
     }, []);
