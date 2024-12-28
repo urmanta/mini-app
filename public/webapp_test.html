@@ -57,7 +57,7 @@ const logMessage = (msg) => {
     console.log(msg);
 };
 const updateSensorDisplay = (data) => {
-    console.log('updateSensorDisplay >>>> ', data);
+    logMessage('updateSensorDisplay >>>> ', data);
     sensorDataDiv.innerHTML = `
         <div>Accelerometer: X=${data.acc.x}, Y=${data.acc.y}, Z=${data.acc.z}</div>
         <div>Gyroscope: X=${data.gyro.x}, Y=${data.gyro.y}, Z=${data.gyro.z}</div>
@@ -78,6 +78,7 @@ const initializeTelegramWebApp = () => {
 };
 
 const startSensors = () => {
+    updateSensorDisplay(sensors);
     const { Accelerometer, Gyroscope, LocationManager } = Telegram.WebApp;
 
     console.log('startSensors >>>>>>>>>>>> ');
