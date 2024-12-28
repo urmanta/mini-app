@@ -122,20 +122,22 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
     };
 
     const sendSensorData = async (accumulatedData: IAccumulateData[]) => {
-        // if (!walkId) return;
-
         console.log('accumulatedData', accumulatedData);
 
+        // Get the last data point before resetting
+        const lastDataPoint = accumulatedData[accumulatedData.length - 1];
+
+        // Reset after getting the data we need
         resetAccumulatedData();
 
         try {
             const walkData = {
                 walk_id: walkId || 1,
-                accX: accumulatedData[accumulatedData.length - 1]?.accX || 0,
-                accY: accumulatedData[accumulatedData.length - 1]?.accY || 0,
-                accZ: accumulatedData[accumulatedData.length - 1]?.accZ || 0,
-                latitude: accumulatedData[accumulatedData.length - 1]?.latitude || 0,
-                longitude: accumulatedData[accumulatedData.length - 1]?.longitude || 0,
+                accX: lastDataPoint?.accX || 0,
+                accY: lastDataPoint?.accY || 0,
+                accZ: lastDataPoint?.accZ || 0,
+                latitude: lastDataPoint?.latitude || 0,
+                longitude: lastDataPoint?.longitude || 0,
                 speed: speed
             };
 
