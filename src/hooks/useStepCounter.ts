@@ -41,6 +41,10 @@ const useStepCounter = () => {
         });
     };
 
+    const resetAccumulatedData = () => {
+        setAccumulatedData([]);
+    };
+
     const accumulateData = () => {
         const { x: accX, y: accY, z: accZ } = webapp.Accelerometer;
         const { x: gyroX, y: gyroY, z: gyroZ } = webapp.Gyroscope; 
@@ -119,7 +123,8 @@ const useStepCounter = () => {
         sensorsAvailable,
         locationPermission,
         currentSpeed,
-        initSensors
+        initSensors,
+        resetAccumulatedData
     };
 };
 

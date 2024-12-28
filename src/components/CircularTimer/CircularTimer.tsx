@@ -1,26 +1,29 @@
-import React, { useState, useLayoutEffect,useEffect, useRef } from 'react';
+import React, { useState, useLayoutEffect, useEffect, useRef } from 'react';
 import { useTimer } from '../../context/TimerContext';
 import Logo from '../Logo';
 import './CircularTimer.css';
+import useInitData from '../../hooks/useInitData';
+import useStepCounter from '../../hooks/useStepCounter';
+import { startWalk, updateWalk, stopWalk } from '../../api/walkApi';
 
 interface CircularTimerProps {
     duration: number;
-    onStart: () => void;
-    onComplete: () => void;
-    onSpeedUpdate: (speed: number) => void;
 }
 
 const CircularTimer: React.FC<CircularTimerProps> = ({
-    duration,
-    onStart,
-    onComplete,
-    onSpeedUpdate
+    duration
 }) => {
     const { timeLeft, setTimeLeft, isRunning, setIsRunning } = useTimer();
     const [countdown, setCountdown] = useState(3);
     const [showCountdown, setShowCountdown] = useState(false);
     const [speed, setSpeed] = useState(0);
     const [canStop, setCanStop] = useState(false);
+    
+    const [walkId, setWalkId] = useState<number | null>(null);
+    const [initDataUnsafe, initData] = useInitData();
+    const { id } = initDataUnsafe?.user || {};
+    
+    const { accumulatedData, initSensors, resetAccumulatedData } = useStepCounter();
     
     const circleRef = useRef<SVGCircleElement>(null);
     const animationFrameRef = useRef<number>();
@@ -68,37 +71,76 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
         }
     }, [showCountdown, countdown]);
 
-    const handleStart = () => {
+    const handleStart = async () => {
         if (!isRunning) {
             setShowCountdown(true);
             setCountdown(3);
+
+            if (id) {
+                try {
+                    initSensors(); // Initialize sensors when starting the walk
+                    const response = await startWalk({ telegram_id: id });
+                    setWalkId(response.walk_id);
+                } catch (error) {
+                    console.error('Failed to start walk:', error);
+                }
+            }
         }
     };
 
     const startTimer = () => {
         setIsRunning(true);
-        onStart();
         startTimeRef.current = Date.now();
     };
 
-    const updateSpeed = () => {
+    const updateSpeed = async() => {
         const randomSpeed = (Math.random() * (4.9 - 4.1) + 4.1).toFixed(1);
         setSpeed(parseFloat(randomSpeed));
-        onSpeedUpdate(parseFloat(randomSpeed));
+        
+        // if (!walkId) return;
+
+        console.log('accumulatedData', accumulatedData);
+
+        resetAccumulatedData();
+
+        try {
+            const walkData = {
+                walk_id: walkId,
+                accX: accumulatedData[accumulatedData.length - 1]?.accX || 0,
+                accY: accumulatedData[accumulatedData.length - 1]?.accY || 0,
+                accZ: accumulatedData[accumulatedData.length - 1]?.accZ || 0,
+                latitude: accumulatedData[accumulatedData.length - 1]?.latitude || 0,
+                longitude: accumulatedData[accumulatedData.length - 1]?.longitude || 0,
+                speed: speed
+            };
+
+            // const response = await updateWalk(walkData);
+            // setSpeed(response.current_speed);
+        } catch (error) {
+            console.error('Failed to update walk:', error);
+        }
+
         lastStepTimeRef.current = Date.now();
     };
 
     const handleComplete = () => {
         setIsRunning(false);
-        onComplete();
+        handleStop();
         if (animationFrameRef.current) {
             cancelAnimationFrame(animationFrameRef.current);
         }
     };
 
-    const handleStop = () => {
+    const handleStop = async () => {
         if (canStop) {
-            handleComplete();
+            if (walkId) {
+                try {
+                    const response = await stopWalk({ walk_id: walkId });
+                    setWalkId(null);
+                } catch (error) {
+                    console.error('Failed to stop walk:', error);
+                }
+            }
         }
     };
 

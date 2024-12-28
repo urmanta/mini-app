@@ -10,7 +10,7 @@ interface TimerContextProps {
 const TimerContext = createContext<TimerContextProps | undefined>(undefined);
 
 export const TimerProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [timeLeft, setTimeLeft] = useState(0); // Default 10 minutes
+    const [timeLeft, setTimeLeft] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const timerRef = useRef<number | null>(null);
 
