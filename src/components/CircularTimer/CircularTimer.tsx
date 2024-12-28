@@ -126,11 +126,11 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
 
         console.log('accumulatedData', accumulatedData);
 
-        // resetAccumulatedData();
+        resetAccumulatedData();
 
         try {
             const walkData = {
-                walk_id: walkId,
+                walk_id: walkId || 1,
                 accX: accumulatedData[accumulatedData.length - 1]?.accX || 0,
                 accY: accumulatedData[accumulatedData.length - 1]?.accY || 0,
                 accZ: accumulatedData[accumulatedData.length - 1]?.accZ || 0,
@@ -139,7 +139,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
                 speed: speed
             };
 
-            // const response = await updateWalk(walkData);
+            const response = await updateWalk(walkData);
             // setSpeed(response.current_speed);
         } catch (error) {
             console.error('Failed to update walk:', error);

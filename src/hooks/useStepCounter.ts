@@ -55,8 +55,6 @@ const useStepCounter = () => {
         webapp.LocationManager.getLocation((data) => {
             const { speed, latitude, longitude } = data;
 
-            console.log('accumulateData >>>> ', { accX, accY, accZ, gyroX, gyroY, gyroZ, latitude, longitude, speed });
-
             setAccumulatedData(prev => [...prev, { accX, accY, accZ, gyroX, gyroY, gyroZ, latitude, longitude, speed }]);
         });
     }
@@ -111,6 +109,7 @@ const useStepCounter = () => {
 
         // Слушатели событий
         webapp.onEvent('gyroscopeChanged', accumulateData);
+        webapp.onEvent('accelerometerChanged', accumulateData);
     };
 
     // Очистка после размонтирования
@@ -121,6 +120,7 @@ const useStepCounter = () => {
                 webapp.Gyroscope.stop();
 
                 webapp.offEvent('gyroscopeChanged', accumulateData);
+                webapp.offEvent('accelerometerChanged', accumulateData);
             }
         };
     }, []);
