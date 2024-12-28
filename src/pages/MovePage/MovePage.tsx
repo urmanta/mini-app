@@ -1,10 +1,10 @@
 import { useState, useCallback, useEffect } from 'react';
-import CircularTimer from '../components/CircularTimer';
-import StrideCoins from '../components/StrideCoins';
-import StreakChart from '../components/StreakChart';
-import { startWalk, updateWalk, stopWalk } from '../api/walkApi';
-import type { walkUpdateResponse } from '../api/types';
-import useInitData from '../hooks/useInitData';
+import CircularTimer from '../../components/CircularTimer';
+import StrideCoins from '../../components/StrideCoins';
+import StreakChart from '../../components/StreakChart';
+import { startWalk, updateWalk, stopWalk } from '../../api/walkApi';
+import type { walkUpdateResponse } from '../../api/types';
+import useInitData from '../../hooks/useInitData';
 import './MovePage.css';
 
 const MovePage = () => {
