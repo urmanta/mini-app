@@ -1,1 +1,1 @@
-export const API_URL = 'https://mock.ru/api/v2'
+export const API_URL = 'http://185.200.242.240:8000/'

@@ -5,12 +5,14 @@ import './CircularTimer.css';
 
 interface CircularTimerProps {
     duration: number;
+    onStart: () => void;
     onComplete: () => void;
     onSpeedUpdate: (speed: number) => void;
 }
 
 const CircularTimer: React.FC<CircularTimerProps> = ({
     duration,
+    onStart,
     onComplete,
     onSpeedUpdate
 }) => {
@@ -75,6 +77,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
 
     const startTimer = () => {
         setIsRunning(true);
+        onStart();
         startTimeRef.current = Date.now();
     };
 
@@ -121,7 +124,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
                         <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
                         <feOffset in="blur" dx="2" dy="2" result="offsetBlur" />
                         <feComposite in="SourceAlpha" in2="offsetBlur" operator="out" result="innerShadow" />
-                        <feFlood flood-color="rgba(0,0,0,0.3)" result="color" />
+                        <feFlood floodColor="rgba(0,0,0,0.3)" result="color" />
                         <feComposite in="color" in2="innerShadow" operator="in" result="shadow" />
                         <feComposite in="shadow" in2="SourceAlpha" operator="in" result="final" />
                         <feMerge>

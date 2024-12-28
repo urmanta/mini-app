@@ -35,3 +35,17 @@
     font-size: 1.1rem;
     font-weight: 600;
 }
+
+.walk-stats {
+    margin: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.walk-stats p {
+    margin: 8px 0;
+    font-size: 16px;
+    color: #fff;
+}
