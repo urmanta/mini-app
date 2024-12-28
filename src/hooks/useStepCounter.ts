@@ -89,11 +89,9 @@ const useStepCounter = () => {
         webapp.LocationManager.init(() => {
             const { isInited, isLocationAvailable, isAccessGranted } = webapp.LocationManager;
 
-            console.log('isInited', isInited);
-            console.log('isLocationAvailable', isLocationAvailable);
-            console.log('isAccessGranted', isAccessGranted);
-
             const permission = isInited && isLocationAvailable && isAccessGranted;
+
+            console.log('permission', permission);
 
             if (!permission) webapp.LocationManager.openSettings();
 
