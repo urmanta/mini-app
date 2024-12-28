@@ -102,6 +102,7 @@ const startSensors = () => {
     } else logMessage("Gyroscope not supported.");
 
     if (LocationManager) {
+        console.log('LocationManager >>>> ', LocationManager);
         LocationManager.init(() => {
             logMessage("LocationManager initialized. Fetching location...");
 

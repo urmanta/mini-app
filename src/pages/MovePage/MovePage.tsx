@@ -5,6 +5,7 @@ import StreakChart from '../../components/StreakChart';
 import { startWalk, updateWalk, stopWalk } from '../../api/walkApi';
 import type { walkUpdateResponse } from '../../api/types';
 import useInitData from '../../hooks/useInitData';
+import useStepCounter from '../../hooks/useStepCounter';
 import './MovePage.css';
 
 const MovePage = () => {
@@ -14,8 +15,13 @@ const MovePage = () => {
     const [walkStats, setWalkStats] = useState<walkUpdateResponse | null>(null);
     const [initDataUnsafe, initData] = useInitData();
     const { id } = initDataUnsafe?.user || {};
+    
+    const { accData } = useStepCounter();
+
+    console.log('accData >>>>> ', accData);
 
     const handleStart = useCallback(async () => {
+
         if (id) {
             try {
                 const response = await startWalk({ telegram_id: id });

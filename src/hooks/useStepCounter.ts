@@ -23,7 +23,6 @@ interface accumulateData {
 }
 
 const useStepCounter = () => {
-    const [stepCount, setStepCount] = useState(0); // Количество шагов
     const [sensorsAvailable, setSensorsAvailable] = useState(false); // Доступность сенсоров
     const [locationPermission, setLocationPermission] = useState<boolean | null>(null); // Права на геолокацию
     const [currentSpeed, setCurrentSpeed] = useState<number | null>(null); // Текущая скорость
@@ -44,12 +43,12 @@ const useStepCounter = () => {
 
     const accumulateData = () => {
         const { x: accX, y: accY, z: accZ } = webapp.Accelerometer;
-        const gyro = webapp.Gyroscope; 
+        const { x: gyroX, y: gyroY, z: gyroZ } = webapp.Gyroscope; 
 
         webapp.LocationManager.getLocation((data) => {
             const { speed, latitude, longitude } = data;
 
-            setAccData(prev => [...prev, { accX, accY, accZ, latitude, longitude, speed }]);
+            setAccData(prev => [...prev, { accX, accY, accZ, gyroX, gyroY, gyroZ, latitude, longitude, speed }]);
         });
     }
 
@@ -120,8 +119,7 @@ const useStepCounter = () => {
     }, []);
 
     return {
-        stepCount,
-        isMoving: stepCount > 0, // Если шаги фиксируются, пользователь движется
+        accData,
         sensorsAvailable,
         locationPermission,
         currentSpeed,
