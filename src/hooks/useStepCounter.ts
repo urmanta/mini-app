@@ -55,6 +55,8 @@ const useStepCounter = () => {
         webapp.LocationManager.getLocation((data) => {
             const { speed, latitude, longitude } = data;
 
+            console.log('accumulateData >>>> ', { accX, accY, accZ, gyroX, gyroY, gyroZ, latitude, longitude, speed });
+
             setAccumulatedData(prev => [...prev, { accX, accY, accZ, gyroX, gyroY, gyroZ, latitude, longitude, speed }]);
         });
     }
