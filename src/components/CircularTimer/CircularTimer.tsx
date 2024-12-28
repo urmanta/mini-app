@@ -21,7 +21,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
     
     const [walkId, setWalkId] = useState<number | null>(null);
     const [initDataUnsafe, initData] = useInitData();
-    const { id } = initDataUnsafe?.user || {};
+    const { id } = initDataUnsafe?.user || {id: 1};
     
     const { accumulatedData, initSensors, resetAccumulatedData } = useStepCounter();
     
@@ -29,6 +29,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
     const animationFrameRef = useRef<number>();
     const startTimeRef = useRef<number>();
     const lastStepTimeRef = useRef<number>();
+    const sensorIntervalRef = useRef<number | null>(null);
     
     const CIRCLE_RADIUS = 165;
     const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * CIRCLE_RADIUS;
@@ -43,7 +44,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
     useLayoutEffect(() => {
         setTimeLeft(duration);
     }, [duration]);
-    
+
     useEffect(() => {
         if (timeLeft <= 0) {
             handleComplete();
@@ -57,6 +58,21 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
             setCanStop(true);
         }
     }, [isRunning, timeLeft]);
+
+    useEffect(() => {
+        if (isRunning) {
+            sensorIntervalRef.current = window.setInterval(() => {
+                sendSensorData();
+            }, 5000);
+
+            return () => {
+                if (sensorIntervalRef.current) {
+                    clearInterval(sensorIntervalRef.current);
+                    sensorIntervalRef.current = null;
+                }
+            };
+        }
+    }, [isRunning]);
 
     useEffect(() => {
         if (showCountdown && countdown > 0) {
@@ -93,12 +109,13 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
         startTimeRef.current = Date.now();
     };
 
-    const updateSpeed = async() => {
+    const updateSpeed = () => {
         const randomSpeed = (Math.random() * (4.9 - 4.1) + 4.1).toFixed(1);
         setSpeed(parseFloat(randomSpeed));
-        
-        // if (!walkId) return;
+        lastStepTimeRef.current = Date.now();
+    };
 
+    const sendSensorData = async () => {
         console.log('accumulatedData', accumulatedData);
 
         resetAccumulatedData();
@@ -119,8 +136,6 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
         } catch (error) {
             console.error('Failed to update walk:', error);
         }
-
-        lastStepTimeRef.current = Date.now();
     };
 
     const handleComplete = () => {
@@ -143,6 +158,16 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
             }
         }
     };
+
+    // Cleanup on unmount
+    useEffect(() => {
+        return () => {
+            if (sensorIntervalRef.current) {
+                clearInterval(sensorIntervalRef.current);
+                sensorIntervalRef.current = null;
+            }
+        };
+    }, []);
 
     const progress = timeLeft / duration;
     const dashOffset = CIRCLE_CIRCUMFERENCE * (1 - progress);

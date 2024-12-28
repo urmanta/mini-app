@@ -1,6 +1,4 @@
-import { JsonObject } from '../interfaces/json.interface'
-
-type RequestBody = JsonObject | FormData
+type RequestBody = any | FormData
 
 type RequestConfig = {
   method: 'POST' | 'GET' | 'PUT' | 'DELETE'
@@ -21,6 +19,7 @@ async function fetchWithConfig<T>(
         },
     body: isFileUpload ? (data as FormData) : JSON.stringify(data),
     credentials: 'include',
+    mode: 'no-cors',
   })
 
   if (!response.ok) {
