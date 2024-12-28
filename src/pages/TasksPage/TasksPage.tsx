@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
-import Logo from '../components/Logo';
+import Logo from '../../components/Logo';
 import './TasksPage.css';
 
 interface Task {

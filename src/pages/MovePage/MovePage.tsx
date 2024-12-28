@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
-import CircularTimer from '../components/CircularTimer';
-import StrideCoins from '../components/StrideCoins';
-import StreakChart from '../components/StreakChart';
+import CircularTimer from '../../components/CircularTimer';
+import StrideCoins from '../../components/StrideCoins';
+import StreakChart from '../../components/StreakChart';
 import './MovePage.css';
 
 const MovePage = () => {
