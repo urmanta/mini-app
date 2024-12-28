@@ -92,6 +92,8 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
             setShowCountdown(true);
             setCountdown(3);
 
+            console.log('id', id);
+            
             if (id) {
                 try {
                     initSensors(); // Initialize sensors when starting the walk
@@ -116,6 +118,8 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
     };
 
     const sendSensorData = async () => {
+        // if (!walkId) return;
+
         console.log('accumulatedData', accumulatedData);
 
         resetAccumulatedData();

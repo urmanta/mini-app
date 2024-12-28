@@ -17,6 +17,9 @@ interface accumulateData {
     accX: number,
     accY: number,
     accZ: number,
+    gyroX: number,
+    gyroY: number,
+    gyroZ: number,
     latitude: number,
     longitude: number,
     speed: number | null
@@ -32,7 +35,7 @@ const useStepCounter = () => {
 
     // Обновление скорости из LocationManager
     const updateSpeedFromLocation = () => {
-        console.log('locationPermission', locationPermission);
+        console.log('locationPermission ~~~~~~', locationPermission);
         // if (locationPermission) return;
 
         webapp.LocationManager.getLocation((data) => {
@@ -85,6 +88,10 @@ const useStepCounter = () => {
         // Инициализация геолокации
         webapp.LocationManager.init(() => {
             const { isInited, isLocationAvailable, isAccessGranted } = webapp.LocationManager;
+
+            console.log('isInited', isInited);
+            console.log('isLocationAvailable', isLocationAvailable);
+            console.log('isAccessGranted', isAccessGranted);
 
             const permission = isInited && isLocationAvailable && isAccessGranted;
 
