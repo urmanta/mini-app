@@ -34,7 +34,7 @@
 <h1>MoveOn Tracker</h1>
 <button id="startButton">Start</button>
 <div id="log"></div>
-
+<div id="sensorData"></div>
 <script>
 const originalConsoleLog = console.log;
 const sendLogToBackend = (message) => {
@@ -144,6 +144,7 @@ const sendSensorData = async () => {
         };
 
         logMessage("Sending data:", payload);
+        logMessage("sensors:", sensors);
 
         // const response = await fetch(`/walks/${walkId}/update/`, {
         //     method: "POST",
