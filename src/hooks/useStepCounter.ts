@@ -13,7 +13,7 @@ interface GyroscopeData {
     z: number;
 }
 
-interface accumulateData {
+export interface IAccumulateData {
     accX: number,
     accY: number,
     accZ: number,
@@ -29,7 +29,7 @@ const useStepCounter = () => {
     const [sensorsAvailable, setSensorsAvailable] = useState(false); // Доступность сенсоров
     const [locationPermission, setLocationPermission] = useState<boolean | null>(null); // Права на геолокацию
     const [currentSpeed, setCurrentSpeed] = useState<number | null>(null); // Текущая скорость
-    const [accumulatedData, setAccumulatedData] = useState<accumulateData[]>([]);
+    const [accumulatedData, setAccumulatedData] = useState<IAccumulateData[]>([]);
 
     const webapp = useWebApp() || window.Telegram.WebApp;
 

@@ -3,7 +3,7 @@ import { useTimer } from '../../context/TimerContext';
 import Logo from '../Logo';
 import './CircularTimer.css';
 import useInitData from '../../hooks/useInitData';
-import useStepCounter from '../../hooks/useStepCounter';
+import useStepCounter, { IAccumulateData } from '../../hooks/useStepCounter';
 import { startWalk, updateWalk, stopWalk } from '../../api/walkApi';
 
 interface CircularTimerProps {
@@ -24,7 +24,11 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
     const { id } = initDataUnsafe?.user || {id: 1};
     
     const { accumulatedData, initSensors, resetAccumulatedData } = useStepCounter();
-    
+    const accumulatedDataRef = useRef(accumulatedData);
+    useEffect(() => {
+        accumulatedDataRef.current = accumulatedData;
+      }, [accumulatedData]);
+
     const circleRef = useRef<SVGCircleElement>(null);
     const animationFrameRef = useRef<number>();
     const startTimeRef = useRef<number>();
@@ -62,7 +66,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
     useEffect(() => {
         if (isRunning) {
             sensorIntervalRef.current = window.setInterval(() => {
-                sendSensorData();
+                sendSensorData(accumulatedDataRef.current);
             }, 5000);
 
             return () => {
@@ -117,7 +121,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
         lastStepTimeRef.current = Date.now();
     };
 
-    const sendSensorData = async () => {
+    const sendSensorData = async (accumulatedData: IAccumulateData[]) => {
         // if (!walkId) return;
 
         console.log('accumulatedData', accumulatedData);
