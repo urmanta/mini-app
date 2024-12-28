@@ -26,7 +26,7 @@ const useStepCounter = () => {
     const [sensorsAvailable, setSensorsAvailable] = useState(false); // Доступность сенсоров
     const [locationPermission, setLocationPermission] = useState<boolean | null>(null); // Права на геолокацию
     const [currentSpeed, setCurrentSpeed] = useState<number | null>(null); // Текущая скорость
-    const [accData, setAccData] = useState<accumulateData[]>([]);
+    const [accumulatedData, setAccumulatedData] = useState<accumulateData[]>([]);
 
     const webapp = useWebApp() || window.Telegram.WebApp;
 
@@ -48,66 +48,62 @@ const useStepCounter = () => {
         webapp.LocationManager.getLocation((data) => {
             const { speed, latitude, longitude } = data;
 
-            setAccData(prev => [...prev, { accX, accY, accZ, gyroX, gyroY, gyroZ, latitude, longitude, speed }]);
+            setAccumulatedData(prev => [...prev, { accX, accY, accZ, gyroX, gyroY, gyroZ, latitude, longitude, speed }]);
         });
     }
 
+    // Проверка наличия сенсоров
+    const checkSensors = () => {
+        const hasAccel = Boolean(webapp.Accelerometer);
+        const hasGyro = Boolean(webapp.Gyroscope);
+        const hasLocation = Boolean(webapp.LocationManager);
+
+        setSensorsAvailable(hasAccel && hasGyro && hasLocation);
+        return hasAccel && hasGyro && hasLocation;
+    };
+
     // Инициализация сенсоров
-    useEffect(() => {
+    const initSensors = () => {
         if (!window.Telegram || !window.Telegram.WebApp) {
             console.warn("Telegram WebApp API недоступен.");
             return;
         }
 
-        // Проверка наличия сенсоров
-        const checkSensors = () => {
-            const hasAccel = Boolean(webapp.Accelerometer);
-            const hasGyro = Boolean(webapp.Gyroscope);
-            const hasLocation = Boolean(webapp.LocationManager);
+        if (!checkSensors()) {
+            console.warn("Some sensors are not available");
+            return;
+        }
 
-            setSensorsAvailable(hasAccel && hasGyro && hasLocation);
-            return hasAccel && hasGyro && hasLocation;
-        };
+        // Запуск сенсоров
+        webapp.Accelerometer.start();
+        webapp.Gyroscope.start();
 
-        // Инициализация сенсоров
-        const initSensors = () => {
-            if (!checkSensors()) {
-                console.warn("Some sensors are not available");
-                return;
-            }
+        // Инициализация геолокации
+        webapp.LocationManager.init(() => {
+            const { isInited, isLocationAvailable, isAccessGranted } = webapp.LocationManager;
 
-            // Запуск сенсоров
-            webapp.Accelerometer.start();
-            webapp.Gyroscope.start();
+            const permission = isInited && isLocationAvailable && isAccessGranted;
 
-            // Инициализация геолокации
-            webapp.LocationManager.init(() => {
-                const { isInited, isLocationAvailable, isAccessGranted } = webapp.LocationManager;
+            if (!permission) webapp.LocationManager.openSettings();
 
-                const permission = isInited && isLocationAvailable && isAccessGranted;
+            setLocationPermission(permission);
 
-                if (!permission) webapp.LocationManager.openSettings();
+            // Получение начальной скорости
+            updateSpeedFromLocation();
 
-                setLocationPermission(permission);
+            // Обновление скорости с периодичностью
+            const locationInterval = setInterval(updateSpeedFromLocation, 1000); // Обновляем каждую секунду
 
-                // Получение начальной скорости
-                updateSpeedFromLocation();
+            // Очистка интервала при размонтировании
+            return () => clearInterval(locationInterval);
+        });
 
-                // Обновление скорости с периодичностью
-                const locationInterval = setInterval(updateSpeedFromLocation, 1000); // Обновляем каждую секунду
+        // Слушатели событий
+        webapp.onEvent('accelerometerChanged', accumulateData);
+    };
 
-                // Очистка интервала при размонтировании
-                return () => clearInterval(locationInterval);
-            });
-
-            // Слушатели событий
-            webapp.onEvent('accelerometerChanged', accumulateData);
-        };
-
-        // Ожидаем готовности WebApp и инициализируем сенсоры
-        initSensors();
-
-        // Очистка после размонтирования
+    // Очистка после размонтирования
+    useEffect(() => {
         return () => {
             if (sensorsAvailable) {
                 webapp.Accelerometer.stop();
@@ -119,10 +115,11 @@ const useStepCounter = () => {
     }, []);
 
     return {
-        accData,
+        accumulatedData,
         sensorsAvailable,
         locationPermission,
         currentSpeed,
+        initSensors
     };
 };
 

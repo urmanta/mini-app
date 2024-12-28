@@ -68,13 +68,14 @@
 .task-button {
     padding: 0.8rem 1.2rem;
     border: none;
-    border-radius: 12px;
+    border-radius: 8px;
     background: var(--button-color, #34bbdd);
     color: var(--button-text-color, #ffffff);
     font-weight: 600;
     font-family: 'Orbitron', sans-serif;
     cursor: pointer;
     transition: all 0.3s ease;
+    text-transform: uppercase;
 }
 
 .task-button:hover {

@@ -16,21 +16,19 @@ const MovePage = () => {
     const [initDataUnsafe, initData] = useInitData();
     const { id } = initDataUnsafe?.user || {};
     
-    const { accData } = useStepCounter();
-
-    console.log('accData >>>>> ', accData);
+    const { accumulatedData, initSensors } = useStepCounter();
 
     const handleStart = useCallback(async () => {
-
         if (id) {
             try {
+                initSensors(); // Initialize sensors when starting the walk
                 const response = await startWalk({ telegram_id: id });
                 setWalkId(response.walk_id);
             } catch (error) {
                 console.error('Failed to start walk:', error);
             }
         }
-    }, [id]);
+    }, [id, initSensors]);
 
     const handleComplete = useCallback(async () => {
         if (walkId) {
@@ -47,16 +45,16 @@ const MovePage = () => {
     const handleSpeedUpdate = useCallback(async (speed: number) => {
         if (!walkId) return;
 
+        console.log('accumulatedData', accumulatedData);
+
         try {
-            // Mock values for accelerometer and location
-            // In a real app, these would come from device sensors
             const walkData = {
                 walk_id: walkId,
-                accX: 0,
-                accY: 0,
-                accZ: 0,
-                latitude: 0,
-                longitude: 0,
+                accX: accumulatedData[accumulatedData.length - 1]?.accX || 0,
+                accY: accumulatedData[accumulatedData.length - 1]?.accY || 0,
+                accZ: accumulatedData[accumulatedData.length - 1]?.accZ || 0,
+                latitude: accumulatedData[accumulatedData.length - 1]?.latitude || 0,
+                longitude: accumulatedData[accumulatedData.length - 1]?.longitude || 0,
                 speed: speed
             };
 
@@ -66,7 +64,7 @@ const MovePage = () => {
         } catch (error) {
             console.error('Failed to update walk:', error);
         }
-    }, [walkId]);
+    }, [walkId, accumulatedData]);
 
     return (
         <div className="move-page">

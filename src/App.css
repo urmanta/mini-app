@@ -23,7 +23,7 @@
 
 :root {
     /* Base theme colors */
-    --bg-color: #121212;
+    --bg-color: #000000;
     --secondary-bg-color: #1a1a1a;
     --tertiary-bg-color: #1b242c;
     --border-color: #252525;
@@ -36,7 +36,7 @@
     /* Brand colors */
     --button-color: #29b7da; 
     /* #34bbdd  */
-    --button-text-color: #ffffff;
+    --button-text-color: #000;
     --coin-color: #FFD700;
 
     /* Overlay colors */

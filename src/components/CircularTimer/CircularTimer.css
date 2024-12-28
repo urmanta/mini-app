@@ -42,14 +42,14 @@
 .countdown {
     font-size: 6rem;
     font-weight: bold;
-    color: var(--button-text-color, #ffffff);
+    color: var(--text-color, #ffffff);
     animation: pulse 1s infinite;
     font-family: 'Orbitron', sans-serif;
 }
 
 .start-button {
     background-color: transparent;
-    color: var(--button-text-color, #ffffff);
+    color: var(--text-color, #ffffff);
     border: none;
     border-radius: 50%;
     width: 325px;
@@ -83,7 +83,7 @@
 .speed {
     font-size: 1.8rem;
     font-weight: bold;
-    color: var(--button-text-color, #ffffff);
+    color: var(--text-color, #ffffff);
     margin-bottom: 0.8rem;
     font-family: 'Orbitron', sans-serif;
 }
@@ -127,7 +127,7 @@
 
 .stop-button:hover {
     background-color: var(--button-color, #34bbdd);
-    color: var(--button-text-color, #ffffff);
+    color: var(--button-text-color);
 }
 
 .spark {
