@@ -58,7 +58,7 @@ const UpgradePage = () => {
                 {availablePoints > 0 && (
                     <div className="points-available">
                         <FaPlusCircle />
-                        {availablePoints} POINT{availablePoints !== 1 ? 'S' : ''} AVAILABLE
+                        <span>{availablePoints}</span> point{availablePoints !== 1 ? 's' : ''} available
                     </div>
                 )}
             </div>

@@ -32,7 +32,6 @@
     color: var(--button-text-color);
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
     box-shadow: 0 4px 12px var(--button-shadow);
     font-family: 'Orbitron', sans-serif;
 }
@@ -41,11 +40,6 @@
     background: var(--hint-color);
     cursor: not-allowed;
     box-shadow: none;
-}
-
-.upgrade-button:not(:disabled):hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px var(--button-shadow);
 }
 
 .branches-section {
@@ -60,12 +54,6 @@
     background: var(--secondary-bg-color);
     padding: 20px;
     border-radius: 12px;
-    transition: all 0.3s ease;
-}
-
-.branch:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 .branch-header {
@@ -138,8 +126,6 @@
     color: var(--button-text-color);
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px var(--button-shadow);
     font-family: 'Orbitron', sans-serif;
     font-size: 0.8rem;
     white-space: nowrap;
@@ -151,18 +137,21 @@
     box-shadow: none;
 }
 
-.branch-upgrade-button:not(:disabled):hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px var(--button-shadow);
-}
-
 .points-available {
     color: var(--button-color);
     margin-top: 10px;
-    font-family: 'Orbitron', sans-serif;
     font-size: 1.1rem;
     display: flex;
     justify-content: center;
+}
+
+.points-available span {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.points-available span:after {
+    content: 'l';
+    color: transparent;
 }
 
 .points-available svg {
