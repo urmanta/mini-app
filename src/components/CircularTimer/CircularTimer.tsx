@@ -174,7 +174,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
 
     // Cleanup on unmount
     useEffect(() => {
-        scaleContainer('.circular-timer', 0.9, 0.4);
+        scaleContainer('.circular-timer', 0.9, 0.45);
         return () => {
             if (sensorIntervalRef.current) {
                 clearInterval(sensorIntervalRef.current);
