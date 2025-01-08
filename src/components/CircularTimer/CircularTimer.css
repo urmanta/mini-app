@@ -1,3 +1,9 @@
+.timer-container {
+    position: absolute;
+    top: 30%;
+    transform: translateY(-50%);
+}
+
 .circular-timer {
     position: relative;
     width: 350px;

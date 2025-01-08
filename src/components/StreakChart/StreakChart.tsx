@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getStreakHistory } from '../../api/api'
+import { scaleContainer } from '../../utils/scaleContainer'
 import { StreakHistoryResponse } from '../../api/types'
 import { FaWalking, FaPlusCircle } from 'react-icons/fa'
 import './StreakChart.css'
@@ -9,6 +10,8 @@ const StreakChart: React.FC = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    scaleContainer('.streak-chart-container', 0.9, 0.4);
+
     const fetchStreakData = async () => {
       try {
         const data = await getStreakHistory()

@@ -5,6 +5,7 @@ import './CircularTimer.css';
 import useInitData from '../../hooks/useInitData';
 import useStepCounter, { IAccumulateData } from '../../hooks/useStepCounter';
 import { startWalk, updateWalk, stopWalk } from '../../api/walkApi';
+import { scaleContainer } from '../../utils/scaleContainer'; 
 
 interface CircularTimerProps {
     duration: number;
@@ -122,6 +123,8 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
     };
 
     const sendSensorData = async (accumulatedData: IAccumulateData[]) => {
+        // if (!walkId) return;
+
         console.log('accumulatedData', accumulatedData);
 
         // Get the last data point before resetting
@@ -171,6 +174,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
 
     // Cleanup on unmount
     useEffect(() => {
+        scaleContainer('.circular-timer', 0.9, 0.4);
         return () => {
             if (sensorIntervalRef.current) {
                 clearInterval(sensorIntervalRef.current);

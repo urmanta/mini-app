@@ -2,6 +2,8 @@
   width: 100%;
   padding: 20px;
   border-radius: 12px;
+  position: absolute;
+  bottom: 15%;
 }
 
 .streak-stats {
