@@ -68,6 +68,21 @@
     margin-bottom: 6px;
 }
 
+.branch-level {
+    color: var(--hint-color, #8c8c8c);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    padding-left: 10px;
+}
+
+.branch-active {
+    color: var(--button-color);
+}
+
+.branch-active span {
+    color: var(--text-color);
+}
+
 .branch p {
     color: var(--hint-color, #8c8c8c);
     font-size: 0.9rem;

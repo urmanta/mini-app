@@ -61,11 +61,15 @@ const StreakChart: React.FC = () => {
               style={{
                 height: `${day.coinsEarned > 0 ? (day.coinsEarned / maxCoins) * 100 : 50}%`,
               }}
-            />
+            >
+              {day.isCurrent && <FaWalking className="walking-icon" />}
+              {!day.isCurrent && day.coinsEarned > 0 && <div className="day-label">
+                {new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' })}
+              </div>}
+            </div>
             <div className="streak-coins" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
               {day.coinsEarned > 0 && day.coinsEarned}
             </div>
-            {day.isCurrent && <FaWalking className="walking-icon" />}
           </div>
         ))}
       </div>

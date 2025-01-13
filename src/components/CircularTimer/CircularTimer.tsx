@@ -59,7 +59,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
     }, [timeLeft]);
 
     useEffect(() => {
-        if (isRunning && timeLeft <= 0) {
+        if (isRunning && timeLeft <= 1490) {
             setCanStop(true);
         }
     }, [isRunning, timeLeft]);
@@ -117,7 +117,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
     };
 
     const updateSpeed = () => {
-        const randomSpeed = (Math.random() * (4.9 - 4.1) + 4.1).toFixed(1);
+        const randomSpeed = (Math.random() * (25.9 - 0.1) + 0.1).toFixed(1);
         setSpeed(parseFloat(randomSpeed));
         lastStepTimeRef.current = Date.now();
     };
@@ -161,6 +161,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
 
     const handleStop = async () => {
         if (canStop) {
+            setIsRunning(false);
             if (walkId) {
                 try {
                     const response = await stopWalk({ walk_id: walkId });
@@ -198,8 +199,8 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
                     </radialGradient>
                     <radialGradient id="backgroundGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
                         <stop offset="0%" stopColor="rgba(0, 0, 0, 0.9)" />
-                        <stop offset="70%" stopColor="rgba(255, 255, 255, 0.05)" />
-                        <stop offset="100%" stopColor="rgba(255, 255, 255, 0.15)" />
+                        <stop offset="70%" stopColor="rgba(255, 255, 255, 0.10)" />
+                        <stop offset="100%" stopColor="rgba(255, 255, 255, 0.22)" />
                     </radialGradient>
                     <filter id="innerShadow" x="-20%" y="-20%" width="140%" height="140%">
                         <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
@@ -263,13 +264,10 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
                     </button>
                 ) : (
                     <>
-                        <div className="speed">
-                            <span className={`speed-value ${speed < 1 || speed > 20 ? 'invalid' : ''}`}>
+                        <div className={`speed ${speed < 1 || speed > 20 ? 'invalid' : ''}`}>
+                            <span className="speed-value">
                                 {speed}
                             </span> km/h
-                        </div>
-                        <div className="time-left">
-                            {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
                         </div>
                         {canStop && (
                             <button className="stop-button" onClick={handleStop}>

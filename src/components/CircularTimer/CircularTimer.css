@@ -90,18 +90,18 @@
     font-size: 1.8rem;
     font-weight: bold;
     color: var(--text-color, #ffffff);
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
     font-family: 'Orbitron', sans-serif;
+}
+
+.speed.invalid {
+    color: #ff0000;
 }
 
 .speed-value {
     font-size: 4rem;
     font-weight: bold;
     font-family: 'Orbitron', sans-serif;
-}
-
-.speed-value.invalid {
-    color: #ff0000;
 }
 
 .energy {
@@ -120,15 +120,20 @@
 }
 
 .stop-button {
-    background-color: transparent;
+    background-color: var(--button-color, #34bbdd);
     border: 2px solid var(--button-color, #34bbdd);
-    color: var(--button-color, #34bbdd);
-    padding: 0.5rem 1.5rem;
-    border-radius: 20px;
-    margin-top: 1rem;
+    color: var(--button-text-color, #000000);
+    border-radius: 40px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: 'Orbitron', sans-serif;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    width: 80px;
+    height: 80px;
+    font-weight: bold;
 }
 
 .stop-button:hover {

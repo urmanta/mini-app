@@ -107,6 +107,10 @@ const StatisticsPage = () => {
             {/* Referrals Block */}
             <div className="stats-block">
                 <h2>Referrals</h2>
+                <div className="referral-list-header">
+                    <div className="referral-header-name">Total: {referrals.length}</div>
+                    <div className="referral-header-coins">Points</div>
+                </div>
                 <ul className="referral-list">
                     {referrals.map((referral, index) => (
                         <li key={referral.id} className="referral-item">

@@ -51,8 +51,18 @@
   align-items: center;
   margin: 0 3px;
   height: 150px;
-  justify-content: end;
+  justify-content: flex-end;
   position: relative;
+}
+
+.day-label {
+  position: absolute;
+  bottom: -20px;
+  font-size: 0.6rem;
+  color: var(--hint-color, #8c8c8c);
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .streak-bar {
@@ -93,6 +103,7 @@
   font-size: 16px;
   position: absolute;
   top: 100%;
+  left: 0;
 }
 
 .streak-chart-loading {

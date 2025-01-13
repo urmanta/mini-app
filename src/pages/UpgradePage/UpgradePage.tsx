@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaPlusCircle } from 'react-icons/fa'
+import { FaPlusCircle, FaStar } from 'react-icons/fa'
 import './UpgradePage.css';
 
 interface Branch {
@@ -10,6 +10,7 @@ interface Branch {
 
 const MAX_LEVEL = 30;
 const MAX_BRANCH_LEVEL = 21;
+const STAR = "\u2B50";
 
 const UpgradePage = () => {
     const [level, setLevel] = useState(1);
@@ -45,14 +46,14 @@ const UpgradePage = () => {
                     {level === MAX_LEVEL ? (
                         <h2 className="max-level">Maximum Level {level}</h2>
                     ) : (
-                        <h2>Level {level}</h2>
+                        <h2>lvl {level}</h2>
                     )}
                     <button 
                         className="upgrade-button"
                         onClick={handleUpgrade}
                         disabled={level >= MAX_LEVEL}
                     >
-                        UPGRADE ACCOUNT
+                        UPGRADE FOR {STAR}{STAR}{STAR}
                     </button>
                 </div>
                 {availablePoints > 0 && (
@@ -67,7 +68,13 @@ const UpgradePage = () => {
                 {branches.map((branch, index) => (
                     <div key={branch.name} className="branch">
                         <div className="branch-header">
-                            <h3 className="branch-name">{branch.name}</h3>
+                            <h3 className="branch-name">
+                                {branch.name}
+                                <span className={`branch-level ${branch.level > 0 ? 'branch-active' : ''}`}>
+                                    <span>{branch.level}</span>
+                                    /{MAX_BRANCH_LEVEL}
+                                </span>
+                            </h3>
                             <p>{branch.description}</p>
                         </div>
                         <div className="branch-progress">
