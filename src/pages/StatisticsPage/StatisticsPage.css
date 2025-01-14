@@ -29,14 +29,14 @@
 }
 
 .stat-value {
-    color: var(--button-color);
+    color: var(--text-color, #ffffff);
     font-size: 1.1rem;
     font-weight: 600;
     font-family: 'Orbitron', sans-serif;
 }
 
 .stat-label {
-    color: var(--hint-color);
+    color: var(--button-color);
     font-size: 0.9rem;
 }
 
@@ -63,6 +63,10 @@
 
 .referral-header-name, .referral-header-coins {
     font-weight: 500;
+}
+
+.referral-header-name span {
+    font-family: 'Orbitron', sans-serif;
 }
 
 .referral-item {

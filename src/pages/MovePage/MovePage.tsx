@@ -9,7 +9,7 @@ const MovePage = () => {
 
     return (
         <div className="move-page">
-            <StrideCoins coins={coins} />
+            <StrideCoins coins={coins} measureUnit="Points" />
             <div className="timer-container">
                 <CircularTimer
                     duration={1500}

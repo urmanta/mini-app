@@ -1,6 +1,7 @@
 .upgrade-page {
     padding: 1.5rem 1rem;
-    max-width: 800px;
+    max-width: 600px;
+    position: relative;
     margin: 0 auto;
     animation: fadeIn 0.3s ease-in-out;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
@@ -14,14 +15,19 @@
 }
 
 .level-info {
+    padding-top: 3rem;
     margin-bottom: 15px;
 }
 
 .level-info h2 {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
     font-family: 'Orbitron', sans-serif;
     color: var(--text-color);
-    margin-bottom: 1rem;
     font-size: 2rem;
+    padding-left: 10px;
 }
 
 .upgrade-button {
@@ -29,17 +35,24 @@
     border: none;
     padding: 12px 24px;
     border-radius: 8px;
+    width: 100%;
     color: var(--button-text-color);
     font-weight: bold;
     cursor: pointer;
     box-shadow: 0 4px 12px var(--button-shadow);
     font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
 }
 
 .upgrade-button:disabled {
     background: var(--hint-color);
     cursor: not-allowed;
     box-shadow: none;
+}
+
+.upgrade-button .stars {
+    padding-left: 4px;
+    font-size: 1.4rem;
 }
 
 .branches-section {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FaPlusCircle, FaStar } from 'react-icons/fa'
+import { FaPlusCircle, FaStar } from 'react-icons/fa';
+import StrideCoins from '../../components/StrideCoins';
 import './UpgradePage.css';
 
 interface Branch {
@@ -41,10 +42,11 @@ const UpgradePage = () => {
 
     return (
         <div className="upgrade-page">
+            <StrideCoins coins={availablePoints} measureUnit="Skill points" />
             <div className="level-section">
                 <div className="level-info">
                     {level === MAX_LEVEL ? (
-                        <h2 className="max-level">Maximum Level {level}</h2>
+                        <h2 className="max-level">lvl {level}</h2>
                     ) : (
                         <h2>lvl {level}</h2>
                     )}
@@ -53,15 +55,9 @@ const UpgradePage = () => {
                         onClick={handleUpgrade}
                         disabled={level >= MAX_LEVEL}
                     >
-                        UPGRADE FOR {STAR}{STAR}{STAR}
+                        UPGRADE FOR <span className="stars">{STAR}{STAR}{STAR}</span>
                     </button>
                 </div>
-                {availablePoints > 0 && (
-                    <div className="points-available">
-                        <FaPlusCircle />
-                        <span>{availablePoints}</span> point{availablePoints !== 1 ? 's' : ''} available
-                    </div>
-                )}
             </div>
 
             <div className="branches-section">
