@@ -5,14 +5,14 @@ import { walkUpdateData, walkUpdateResponse, walkStartResponse, walkStopResponse
 export const startWalk = (data: {
     telegram_id: number
   }): Promise<walkStartResponse> => {
-  return fetchWithConfig<any>(`${API_URL}/walks`, {
+  return fetchWithConfig<any>(`${API_URL}/walks/`, {
     method: 'POST',
     data,
   })
 }
 
 export const updateWalk = (data: walkUpdateData): Promise<walkUpdateResponse> => {
-  return fetchWithConfig<any>(`${API_URL}/walks/${data.walk_id}`, {
+  return fetchWithConfig<any>(`${API_URL}/walks/${data.walk_id}/`, {
     method: 'PUT',
     data,
   })
@@ -21,7 +21,7 @@ export const updateWalk = (data: walkUpdateData): Promise<walkUpdateResponse> =>
 export const stopWalk = (data: {
     walk_id: number
   }): Promise<walkStopResponse> => {
-  return fetchWithConfig<any>(`${API_URL}/walks/${data.walk_id}/finish`, {
+  return fetchWithConfig<any>(`${API_URL}/walks/${data.walk_id}/finish/`, {
     method: 'POST',
     data,
   })
