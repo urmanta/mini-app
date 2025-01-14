@@ -19,7 +19,6 @@ async function fetchWithConfig<T>(
         },
     body: isFileUpload ? (data as FormData) : JSON.stringify(data),
     credentials: 'include',
-    mode: 'no-cors',
   })
 
   if (!response.ok) {
