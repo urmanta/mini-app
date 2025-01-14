@@ -162,6 +162,7 @@ const CircularTimer: React.FC<CircularTimerProps> = ({
     const handleStop = async () => {
         if (canStop) {
             setIsRunning(false);
+            setTimeLeft(duration);
             if (walkId) {
                 try {
                     const response = await stopWalk({ walk_id: walkId });
